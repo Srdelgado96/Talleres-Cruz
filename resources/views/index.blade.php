@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Taleres Cruz</title>
+    <title>Talleres Cruz</title>
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="assets/img/favicon.png" />
     <!-- Font Awesome icons (free version)-->
@@ -16,6 +16,8 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="css/styles.css" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+        crossorigin="anonymous"></script>
 </head>
 
 <body id="page-top">
@@ -30,7 +32,7 @@
                 Menu
                 <i class="fas fa-bars ms-1"></i>
             </button>
-            
+
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
                     <li class="nav-item"><a class="nav-link" href="#servcios">Servicios</a></li>
@@ -48,7 +50,8 @@
         <div class="container">
             <div class="masthead-subheading">Bienvenidos!</div>
             <div class="masthead-heading text-uppercase">Talleres Cruz</div>
-            <a class="btn btn-primary btn-xl text-uppercase" href="home">Login</a>
+            <a class="btn btn-primary btn-xl text-uppercase" id="botonlogin" href="javascript:void(0)"
+                onclick="openLoginModal();">Login</a>
         </div>
     </header>
     <!-- servcios-->
@@ -78,7 +81,8 @@
                         <img class="img-responsive fa-stack-1x fa-inverse" src="assets/img/itv.png" alt="..."></a>
                     </span>
                     <h4 class="my-3">Pre-ITV</h4>
-                    <p class="text-muted">Realizamos todas las revisiones necesarias para garantizar de que su vehiculo
+                    <p class="text-muted">Realizamos todas las revisiones necesarias para garantizar de que su
+                        vehiculo
                         pase la ITV.
                         Ademas recojemos su vehiculo en su domicilio y se lo devolvemos con la ITV pasada.
                     </p>
@@ -91,7 +95,8 @@
                             alt="..."></a>
                     </span>
                     <h4 class="my-3">Supension</h4>
-                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam
+                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime
+                        quam
                         architecto quo inventore harum ex magni, dicta impedit.</p>
                 </div>
                 <div class="col-md-4">
@@ -102,7 +107,8 @@
                             alt="..."></a>
                     </span>
                     <h4 class="my-3">Transmisión</h4>
-                    <p class="text-muted">Todo tipos de averias de transmision, reparamos o remplazamosla transmision de
+                    <p class="text-muted">Todo tipos de averias de transmision, reparamos o remplazamosla
+                        transmision de
                         su vehiculo asi como la caja de cambios.</p>
                 </div>
                 <div class="col-md-4">
@@ -112,7 +118,8 @@
                         <img class="img-responsive fa-stack-1x fa-inverse" src="assets/img/aceite.png" alt="..."></a>
                     </span>
                     <h4 class="my-3">Aceites y Filtros</h4>
-                    <p class="text-muted">Cambiamos el aceite de su motor y todo los filtros (aceite, combustible, aire
+                    <p class="text-muted">Cambiamos el aceite de su motor y todo los filtros (aceite, combustible,
+                        aire
                         y habitáculo),
                         respetando el medio ambiente y haciendo una correcta gestion de resiudos, para ello contamos con
                         las primeras
@@ -126,8 +133,9 @@
                             alt="..."></a>
                     </span>
                     <h4 class="my-3">Aire Acondicionado</h4>
-                    <p class="text-muted">Contamos con las mejores maquinas para detectar fugas o averias en el sistema de aire acondicionado,
-                    rellenamos el gas de su vehiculo y revisamo todo es sistema de aire acondicionado </p>
+                    <p class="text-muted">Contamos con las mejores maquinas para detectar fugas o averias en el
+                        sistema de aire acondicionado,
+                        rellenamos el gas de su vehiculo y revisamo todo es sistema de aire acondicionado </p>
                 </div>
             </div>
         </div>
@@ -250,9 +258,12 @@
                             <h4 class="subheading">Instalaciones</h4>
                         </div>
                         <div class="timeline-body">
-                            <p class="text-muted">Nos encontramos en la Nave 32, de Poligon Industrial Polirosa (Huelva), contamos con una superficie de 800 metros cuadrados.
-                                en ella entre otras prestaciones , tenemos 6 elevadores para garantizar la mayor rapidez posible al solucionar su averia, difentes maquinaria de diagnosis
-                                neumaticos, aire acondicionado entre otras. Todo ello garantizando la seguridad de nuestros trabajadores dotandole de los mejores EPI y herramientas
+                            <p class="text-muted">Nos encontramos en la Nave 32, de Poligon Industrial Polirosa
+                                (Huelva), contamos con una superficie de 800 metros cuadrados.
+                                en ella entre otras prestaciones , tenemos 6 elevadores para garantizar la mayor rapidez
+                                posible al solucionar su averia, difentes maquinaria de diagnosis
+                                neumaticos, aire acondicionado entre otras. Todo ello garantizando la seguridad de
+                                nuestros trabajadores dotandole de los mejores EPI y herramientas
                             </p>
                         </div>
                     </div>
@@ -266,8 +277,10 @@
                             <h4 class="subheading">Formación</h4>
                         </div>
                         <div class="timeline-body">
-                            <p class="text-muted">Debido a la evolución de los vehículos, nuestros trabajadores siempre estan en constante
-                                formacion , impartida directamente desde los fabricantes. Ahora se estan especiaizadno en los coches eleectricos.
+                            <p class="text-muted">Debido a la evolución de los vehículos, nuestros trabajadores
+                                siempre estan en constante
+                                formacion , impartida directamente desde los fabricantes. Ahora se estan especiaizadno
+                                en los coches eleectricos.
                                 Gracias a esta formacion somos capaces de encontrar la averia lo antes posible.
                             </p>
                         </div>
@@ -282,7 +295,8 @@
                             <h4 class="subheading">Precios</h4>
                         </div>
                         <div class="timeline-body">
-                            <p class="text-muted">Contamos con los mejores precios del mercado, si encuentras algún taller que leofrezca un mejor preci,nosotros se lo igualamo</p>
+                            <p class="text-muted">Contamos con los mejores precios del mercado, si encuentras algún
+                                taller que leofrezca un mejor preci,nosotros se lo igualamo</p>
                         </div>
                     </div>
                 </li>
@@ -295,7 +309,8 @@
                             <h4 class="subheading">Garantía</h4>
                         </div>
                         <div class="timeline-body">
-                            <p class="text-muted">En Talleres Curz, utilizamos recambios originales y con garantía.Todas nuestras reparaciones o productos cuentan con 1 año de garantia</p>
+                            <p class="text-muted">En Talleres Curz, utilizamos recambios originales y con
+                                garantía.Todas nuestras reparaciones o productos cuentan con 1 año de garantia</p>
                         </div>
                     </div>
                 </li>
@@ -305,15 +320,17 @@
 
                 <li class="timeline-inverted">
                     <div class="timeline-image">
-                        <a href=""><img class="rounded-circle img-fluid" src="assets/img/about/5.jpg" alt="..." /></a></div>
+                        <a href=""><img class="rounded-circle img-fluid" src="assets/img/about/5.jpg" alt="..." /></a>
+                    </div>
                     <div class="timeline-panel">
                         <div class="timeline-heading">
-                
+
                             <h4 class="subheading">Redes Sociales</h4>
                         </div>
-                        <div class="timeline-body"> Descubre mas sobre nosotros en nuestro instagram, subimos nuestr trabajo diario
-                        <a class="btn btn-dark btn-social mx-2" href="https://www.instagram.com/tallercruzhuelva/"><i
-                                class="fab fa-instagram"></i></a>
+                        <div class="timeline-body"> Descubre mas sobre nosotros en nuestro instagram, subimos nuestr
+                            trabajo diario
+                            <a class="btn btn-dark btn-social mx-2"
+                                href="https://www.instagram.com/tallercruzhuelva/"><i class="fab fa-instagram"></i></a>
                         </div>
                     </div>
                 </li>
@@ -345,9 +362,13 @@
                         <img class="mx-auto rounded-circle" src="assets/img/team/2.jpg" alt="..." />
                         <h4>Antonio Martinez</h4>
                         <p class="text-muted">Ingeniero Electromecánico</p>
-                        <a class="btn btn-dark btn-social mx-2" href="https://www.instagram.com/adgale96"><i class="fab fa-instagram"></i></a>
-                        <a class="btn btn-dark btn-social mx-2" href="https://www.facebook.com/alex.delgado.585559"><i class="fab fa-facebook-f"></i></a>
-                        <a class="btn btn-dark btn-social mx-2" href="https://www.linkedin.com/in/alejandro-delgado-garrido"><i class="fab fa-linkedin-in"></i></a>
+                        <a class="btn btn-dark btn-social mx-2" href="https://www.instagram.com/adgale96"><i
+                                class="fab fa-instagram"></i></a>
+                        <a class="btn btn-dark btn-social mx-2" href="https://www.facebook.com/alex.delgado.585559"><i
+                                class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-dark btn-social mx-2"
+                            href="https://www.linkedin.com/in/alejandro-delgado-garrido"><i
+                                class="fab fa-linkedin-in"></i></a>
                     </div>
                 </div>
                 <div class="col-lg-4">
@@ -355,9 +376,13 @@
                         <img class="mx-auto rounded-circle" src="assets/img/team/1.jpg" alt="..." />
                         <h4>Alejandro Delgado</h4>
                         <p class="text-muted">CEO y Administrativo</p>
-                        <a class="btn btn-dark btn-social mx-2" href="https://www.instagram.com/adgale96"><i class="fab fa-instagram"></i></a>
-                        <a class="btn btn-dark btn-social mx-2" href="https://www.facebook.com/alex.delgado.585559"><i class="fab fa-facebook-f"></i></a>
-                        <a class="btn btn-dark btn-social mx-2" href="https://www.linkedin.com/in/alejandro-delgado-garrido"><i class="fab fa-linkedin-in"></i></a>
+                        <a class="btn btn-dark btn-social mx-2" href="https://www.instagram.com/adgale96"><i
+                                class="fab fa-instagram"></i></a>
+                        <a class="btn btn-dark btn-social mx-2" href="https://www.facebook.com/alex.delgado.585559"><i
+                                class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-dark btn-social mx-2"
+                            href="https://www.linkedin.com/in/alejandro-delgado-garrido"><i
+                                class="fab fa-linkedin-in"></i></a>
                     </div>
                 </div>
                 <div class="col-lg-4">
@@ -365,15 +390,20 @@
                         <img class="mx-auto rounded-circle" src="assets/img/team/3.jpg" alt="..." />
                         <h4>Sergio</h4>
                         <p class="text-muted">Ingeniero Mecánico</p>
-                        <a class="btn btn-dark btn-social mx-2" href="https://www.instagram.com/adgale96"><i class="fab fa-instagram"></i></a>
-                        <a class="btn btn-dark btn-social mx-2" href="https://www.facebook.com/alex.delgado.585559"><i class="fab fa-facebook-f"></i></a>
-                        <a class="btn btn-dark btn-social mx-2" href="https://www.linkedin.com/in/alejandro-delgado-garrido"><i class="fab fa-linkedin-in"></i></a>
+                        <a class="btn btn-dark btn-social mx-2" href="https://www.instagram.com/adgale96"><i
+                                class="fab fa-instagram"></i></a>
+                        <a class="btn btn-dark btn-social mx-2" href="https://www.facebook.com/alex.delgado.585559"><i
+                                class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-dark btn-social mx-2"
+                            href="https://www.linkedin.com/in/alejandro-delgado-garrido"><i
+                                class="fab fa-linkedin-in"></i></a>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-lg-8 mx-auto text-center">
-                    <p class="large text-muted">Juntos formamos un gran equipo, con un muy buen ambiente de trabajo, haciendo lo que nos apasiona.</p>
+                    <p class="large text-muted">Juntos formamos un gran equipo, con un muy buen ambiente de trabajo,
+                        haciendo lo que nos apasiona.</p>
                 </div>
             </div>
         </div>
@@ -421,9 +451,9 @@
                     <div class="col-md-6">
                         <div class="form-group form-group-textarea mb-md-0">
                             <!-- Message input-->
-                            <textarea class="form-control" id="message" placeholder="Your Message *"
-                                data-sb-validations="required"></textarea>
-                            <div class="invalid-feedback" data-sb-feedback="message:required">El mensaje es obligatorio.
+                            <textarea class="form-control" id="message" placeholder="Tu mensaje *" data-sb-validations="required"></textarea>
+                            <div class="invalid-feedback" data-sb-feedback="message:required">El mensaje es
+                                obligatorio.
                             </div>
                         </div>
                     </div>
@@ -434,7 +464,7 @@
                 <!-- has successfully submitted-->
                 <div class="d-none" id="submitSuccessMessage">
                     <div class="text-center text-white mb-3">
-                        <div class="fw-bolder">Enviado con  Exito!</div>
+                        <div class="fw-bolder">Enviado con Exito!</div>
                     </div>
                 </div>
                 <!-- Submit error message-->
@@ -456,7 +486,8 @@
             <div class="row align-items-center">
                 <div class="col-lg-4 text-lg-start">Copyright &copy; 2022</div>
                 <div class="col-lg-4 my-3 my-lg-0">
-                    <a class="btn btn-dark btn-social mx-2" href="https://www.instagram.com/tallercruzhuelva/"><i class="fab fa-instagram"></i></a>
+                    <a class="btn btn-dark btn-social mx-2" href="https://www.instagram.com/tallercruzhuelva/"><i
+                            class="fab fa-instagram"></i></a>
                 </div>
             </div>
         </div>
@@ -699,8 +730,144 @@
             </div>
         </div>
     </div>
+
+    {{-- MODAL LOGIN --}}
+
+    <div class="modal fade login" id="loginModal">
+        <div class="modal-dialog login animated">
+            <button type="button"><i class="fa-solid fa-rectangle-xmark"></i></button>
+            <div class="modal-content">
+                <div class="text-center">
+                    <h4 class="modal-title">Inicar Sesión</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="box">
+                        <div class="content">
+                            <div class="error"></div>
+                            <div class="form loginBox">
+                                <form method="POST" action="{{ route('login') }}">
+                                    @csrf
+
+                                    <input id="email" type="text"
+                                        class="form-control @error('email') is-invalid @enderror" name="email"
+                                        value="{{ old('email') }}" required autocomplete="email" autofocus
+                                        placeholder="email">
+
+                                    @error('email')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                    <br>
+                                    <input id="password" type="password"
+                                        class="form-control @error('password') is-invalid @enderror" name="password"
+                                        required autocomplete="current-password" placeholder="Password">
+                                    @error('password')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                    {{-- <input class="btn btn-default btn-login" type="button" value="Login" onclick="loginAjax()"> --}}
+                                    <button type="submit" class="btn btn-default btn-login">
+                                        {{ __('Login') }}
+                                    </button>
+                                    @if (Route::has('password.request'))
+                                        <a href="javascript: showRegisterForm();">olvide la contraseña</a>
+                                        </a>
+                                    @endif
+                                </form>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="division">
+                            <div class="line l"></div>
+                            <span>O usa:</span>
+                            <div class="line r"></div>
+                        </div>
+                        <div class="social">
+                            <a class="circle github" href="#">
+                                <i class="fa-brands fa-github fa-fw"></i>
+
+                                <a id="facebook_login" class="circle facebook" href="#">
+                                    <i class="fa-brands fa-google fa-fw"></i>
+                                </a>
+
+
+                        </div>
+                    </div>
+                    <div class="box">
+                        <div class="content registerBox" style="display:none;">
+                            <div class="form">
+                                <form method="POST" action="{{ route('register') }}">
+                                    @csrf
+                                    <div class="form-group row">
+
+
+                                        <div class="container col-md-12">
+                                            <input id="email" type="email"
+                                                class="form-control @error('email') is-invalid @enderror" name="email"
+                                                value="{{ old('email') }}" required autocomplete="email"
+                                                placeholder="email">
+
+                                            @error('email')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                            <br>
+                                        </div>
+                                    </div> <input id="password" type="password"
+                                        class="form-control @error('password') is-invalid @enderror" name="password"
+                                        required autocomplete="new-password" placeholder="Contraseña">
+
+                                    @error('password')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                    <div class="form-group row">
+
+                                        <div class="col-md-12">
+                                            <input id="password-confirm" type="password" class="form-control"
+                                                name="password_confirmation" required autocomplete="new-password"
+                                                placeholder="Confirmar Contraseña">
+                                        </div>
+                                    </div>
+
+                                    <button type="submit" class="btn btn-default btn-register">
+                                        {{ __('REGISTRARME') }}
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="forgot login-footer">
+                        <span>¿No tienes Cuenta?
+                            <a class="nav-link" href="javascript: showRegisterForm();">Registrarme</a>
+                        </span>
+                    </div>
+                    <div class="forgot register-footer" style="display:none">
+                        <span>Ya tienes cuenta?</span>
+                        <a href="javascript: showLoginForm();">Login</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
     <!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src=" https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js"></script>
+
+
     <!-- Core theme JS-->
     <script src="js/scripts.js"></script>
     <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
@@ -708,6 +875,7 @@
     <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
     <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
     <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+
 </body>
 
 </html>
