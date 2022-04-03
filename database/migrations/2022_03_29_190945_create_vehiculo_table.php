@@ -15,12 +15,12 @@ class CreateVehiculoTable extends Migration
     {
         Schema::create('vehiculos', function (Blueprint $table) {
             $table->id();
-            $table->string('marca');
-            $table->string('modelo');
+            $table->string('marca')->nullable();
+            $table->string('modelo')->nullable();
             $table->string('matricula')->unique();
-            $table->string('kilometros')->unique();
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on("users");
+            $table->string('kilometros')->nullable();
+            $table->unsignedBigInteger('cliente_id');
+            $table->foreign('cliente_id')->references('id')->on("clientes");
             $table->timestamps();
         });
     }
@@ -32,6 +32,6 @@ class CreateVehiculoTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('vehiculo');
+        Schema::dropIfExists('vehiculos');
     }
 }
