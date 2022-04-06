@@ -15,7 +15,23 @@ use Illuminate\Support\Facades\Auth;
 */
 
 
+
 Route::get('/', 'indexController@index')->name('index');
 Auth::routes();
+//-----CLIENTES---/
+Route::resource('Clientes', ClienteController::class);
+Route::get('/home', 'ClienteController@index')->name('home');
+Route::post('infoclientes', 'ClienteController@infoclientes')->name('infoclientes');
+Route::get('/clientes', 'ClienteController@index')->name('indexCliente');
 
-Route::get('/home', 'HomeController@index')->name('home');
+//-----VEHICULOS---/
+Route::resource('Vehiculos', ClienteController::class);
+Route::get('/vehiculos', 'VehiculoController@index')->name('indexVehiculo');
+
+
+//-----AVERIAS---/
+Route::resource('Averias', ClienteController::class);
+Route::get('/averias', 'AveriaController@index')->name('indexAverias');
+
+
+
