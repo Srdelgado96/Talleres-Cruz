@@ -40,4 +40,8 @@ class User extends Authenticatable
     {
         return $this->hasMany(Vehiculo::class);
     }
+    public function Averia()
+    {
+        return $this->belongsTo(Averia::class);
+    }
 }

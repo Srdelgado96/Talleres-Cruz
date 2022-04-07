@@ -37,8 +37,8 @@
                         <td>{{ $vehiculo->matricula }}</td>
                         <td>{{ $vehiculo->marca }}</td>
                         <td>{{ $vehiculo->modelo }}</td>
-                        <td>{{ $vehiculo->kilometro }}</td>
-                         <td>{{ $vehiculo->cliente_id }}</td>
+                        <td>{{ $vehiculo->kilometros }}</td>
+                        <td>{{ $vehiculo->cliente->nombre }}</td>
                         <td>
                             <div class="d-flex align-items-center">
 

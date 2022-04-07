@@ -735,7 +735,7 @@
 
     <div class="modal fade login" id="loginModal">
         <div class="modal-dialog login animated">
-            <button type="button"><i class="fa-solid fa-rectangle-xmark"></i></button>
+            
             <div class="modal-content">
                 <div class="text-center">
                     <h4 class="modal-title">Inicar Sesión</h4>

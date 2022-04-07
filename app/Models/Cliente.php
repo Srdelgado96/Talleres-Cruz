@@ -6,8 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Cliente extends Model
 {
-    protected $table ="clientes";
-    protected  $primaryKey = "id";
+    protected $table ="clientes"; //lo mismos que pais
+    protected $primaryKey = "id";
 
 
 

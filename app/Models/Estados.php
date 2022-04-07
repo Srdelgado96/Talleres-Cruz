@@ -8,5 +8,10 @@ class Estados extends Model
 {
     protected $table = "estados";
     protected  $primaryKey ="id";
+
+    public function Estado()
+    {
+        return $this->hasMany(Estado::class);
+    }
     
 }

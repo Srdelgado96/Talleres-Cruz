@@ -12,12 +12,24 @@ class Averia extends Model
 
 
 
-
+    public function Estado()
+    {
+        return $this->belongsTo(Estados::class);
+    }
 
 
 
     public function Cliente()
     {
-        return $this->belongsTo(Cliente::class, 'id');
+        return $this->belongsTo(Cliente::class);
+    }
+    public function Vehiculo()
+    {
+        return $this->belongsTo(Vehiculo::class);
+    }
+
+    public function User()
+    {
+        return $this->belongsTo(\App\User::class);
     }
 }

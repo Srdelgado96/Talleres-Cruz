@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Averia;
+use App\Models\Estados;
 class AveriaController extends Controller
 {
     /**
@@ -58,7 +59,9 @@ class AveriaController extends Controller
      */
     public function edit($id)
     {
-        //
+        $Averia = Averia::find($id);
+        $todoEstados = Estados::all();
+        return view('Averias.modificarAverias', compact('Averia', 'todoEstados'));
     }
 
     /**
@@ -81,6 +84,10 @@ class AveriaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $averia = Averia::find($id)->first();
+        $averia->delete();
+        return redirect()->route('Averias.indexAverias')
+        ->with('success', 'La Averiía ha sido creado con exito');
+    
     }
 }

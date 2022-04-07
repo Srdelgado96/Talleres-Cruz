@@ -24,7 +24,7 @@
                 <form class="forms-sample" action="{{ route('Clientes.store') }}">
                     <div class="form-group">
                         <label for="exampleInputName1">Nombre</label>
-                        <input type="text" class="form-control" id="exampleInputName1" placeholder="Nombre" name="nombre"
+                        <input type="text" class="form-control" id="nombre" placeholder="Nombre" name="nombre"
                             value="{{ old('nombre', $Cliente->nombre) }}">
                     </div>
 
@@ -40,7 +40,7 @@
                     </div>
                     <div class="form-group">
                         <label for="exampleInputPassword4">Contrsaseña</label>
-                        <input type="password" class="form-control" id="exampleInputPassword4" placeholder="Contraseña"
+                        <input type="password" class="form-control" id="password" placeholder="Contraseña"
                             name="email">
                     </div>
                     {{-- <div class="form-group">
@@ -52,7 +52,7 @@
                       </div> --}}
                     <div class="form-group">
                         <label for="exampleInputCity1">DNI</label>
-                        <input type="text" class="form-control" id="exampleInputCity1" placeholder="DNI" name="dni"
+                        <input type="text" class="form-control" id="dni" placeholder="DNI" name="dni"
                             value="{{ old('dni', $Cliente->dni) }}">
                     </div>
                     <button type="submit" class="btn btn-success btn-rounded btn-fw">Confirmar</button>

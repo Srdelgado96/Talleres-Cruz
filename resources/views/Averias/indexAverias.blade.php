@@ -39,15 +39,15 @@
                         <td>{{ $averia->nombre }}</td>
                         <td>{{ $averia->fecha_registro }}</td>
                         <td>{{ $averia->fecha_finalizacion }}</td>
-                        <td>{{ $averia->estado_id }}</td>
-                        <td>{{ $averia->cliente_id }}</td>
-                         <td>{{ $averia->vehiculo_id }}</td>
-                          <td>{{ $averia->user_id }}</td>
+                        <td>{{ $averia->estado->estado}}</td>
+                        <td>{{ $averia->cliente->nombre }}</td>
+                         <td>{{ $averia->vehiculo->matricula }}</td>
+                          <td>{{ $averia->user->nombre }}</td>
                         <td>
                             <div class="d-flex align-items-center">
 
 
-                                <a href="{{ route('Clientes.edit', $averia->id) }}">
+                                <a href="{{ route('Averias.edit', $averia->id) }}">
                                 <button type="button" class="btn btn-success btn-sm btn-icon-text mr-3">
                                     Editar
                                     <i class="typcn typcn-edit btn-icon-append"></i>
@@ -56,7 +56,7 @@
                             Borrar
                             <i class="typcn typcn-delete-outline btn-icon-append"></i>                          
                             </button> --}}
-                                <form action="{{ route('Clientes.destroy', $averia->id) }}" method="Post">
+                                <form action="{{ route('Averias.destroy', $averia->id) }}" method="Post">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-danger btn-sm btn-icon-text">BORRAR</button>

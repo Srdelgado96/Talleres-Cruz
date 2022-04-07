@@ -30,7 +30,7 @@ Route::get('/vehiculos', 'VehiculoController@index')->name('indexVehiculo');
 
 
 //-----AVERIAS---/
-Route::resource('Averias', ClienteController::class);
+Route::resource('Averias', AveriaController::class);
 Route::get('/averias', 'AveriaController@index')->name('indexAverias');
 
 
