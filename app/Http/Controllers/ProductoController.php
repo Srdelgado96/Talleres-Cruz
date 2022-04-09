@@ -3,12 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Averia;
-use App\Models\Estados;
 use Illuminate\Support\Facades\Session;
-class AveriaController extends Controller
+use App\Models\Productos;
+
+class ProductoController extends Controller
 {
-    
     /**
      * Display a listing of the resource.
      *
@@ -16,11 +15,9 @@ class AveriaController extends Controller
      */
     public function index()
     {
-        
-        session::put('pagActual', 'Averia');
-        $TodasAverias = Averia::all();
-        return view('Averias.indexAverias', compact('TodasAverias'));
-        
+        session::put('pagActual', 'Productos');
+        $TodasProductos = Productos::all();
+        return view('Producto.indexProductos', compact('TodasProductos'));
     }
 
     /**
@@ -30,7 +27,7 @@ class AveriaController extends Controller
      */
     public function create()
     {
-        return view('Averias.nuevaAveria');
+        //
     }
 
     /**
@@ -52,7 +49,7 @@ class AveriaController extends Controller
      */
     public function show($id)
     {
-        echo $id;
+        //
     }
 
     /**
@@ -63,10 +60,7 @@ class AveriaController extends Controller
      */
     public function edit($id)
     {
-        session::put('pagActual', 'Modificar Averia');
-        $Averia = Averia::find($id);
-        $todoEstados = Estados::all();
-        return view('Averias.modificarAverias', compact('Averia', 'todoEstados'));
+        //
     }
 
     /**
@@ -89,12 +83,6 @@ class AveriaController extends Controller
      */
     public function destroy($id)
     {
-
-        $averia = Averia::find($id)->first();
-
-        $averia->delete();
-        return redirect()->route('Averias.indexAverias')
-        ->with('success', 'La Averiía ha sido creado con exito');
-    
+        //
     }
 }

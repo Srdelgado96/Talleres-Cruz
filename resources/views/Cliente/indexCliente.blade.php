@@ -84,23 +84,7 @@
             });
            
         });
- $(document).on('click', '.informacion', function () {
 
-$.ajax({
-    // la URL para la petición
-    url : "{{ route('infoclientes') }}",
-    data : { id1 : 123 },
-    method : 'POST',
-   
-    success : function(json) {
-     alert(json)
-    },
-    error : function(xhr, status) {
-        alert('Disculpe, existió un problema'+ status);
-    }
-});
-
-	});
 
     </script>
 @endsection

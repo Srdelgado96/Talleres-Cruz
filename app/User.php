@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Models\Rol;
 
 class User extends Authenticatable
 {
@@ -36,12 +37,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-    public function users()//UN USUARIO TIENE MUCHOS VEHICULOS
+    public function Rol()//UN USUARIO TIENE MUCHOS VEHICULOS
     {
-        return $this->hasMany(Vehiculo::class);
+        return $this->belongsTo(Rol::class);
     }
-    public function Averia()
-    {
-        return $this->belongsTo(Averia::class);
-    }
+   
 }

@@ -11,10 +11,10 @@ class Vehiculo extends Model
 
 
 
-    // un cliente tiene muchos vehiculos e indicar el id de vehiculos
+    // un cliente tiene muchos vehiculos 
     public function Cliente()
     {
-        return $this->belongsTo(Cliente::class);
+        return $this->belongsTo(Cliente::class);// no se indica id porque sigue el standar
     }
 
 

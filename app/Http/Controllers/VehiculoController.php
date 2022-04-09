@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Vehiculo;
+use Illuminate\Support\Facades\Session;
 
 class VehiculoController extends Controller
 {
@@ -14,6 +15,7 @@ class VehiculoController extends Controller
      */
     public function index()
     {
+        session::put('pagActual', 'Vehiculos');
         $Todosvehiculos = Vehiculo::all();
         // dd($Todasclientes);
         return view('Vehiculo.indexVehiculo', compact('Todosvehiculos'));

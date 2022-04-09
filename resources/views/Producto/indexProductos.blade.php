@@ -15,33 +15,26 @@
         </div>
     @endif
     <div class="table-responsive pt-3">
-        <form action=""> 
-            @csrf
+        
         
         <table class="table table-striped project-orders-table" id="tablaClientes">
             <thead>
                 <tr>
-                    <th class="ml-5">Matrícula</th>
-                    <th>Marca</th>
-                    <th>Modelo</th>
-                    <th>Kilometro</th>
-                    <th>Cliente</th>
+                    <th class="ml-5">Nombre</th>
+                    <th>Precio</th>
+                
+                   
                     <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($Todosvehiculos as $vehiculo)
-                    <tr id="{{$vehiculo->id}}" class="informacion">
-                        <td>{{ $vehiculo->matricula }}</td>
-                        <td>{{ $vehiculo->marca }}</td>
-                        <td>{{ $vehiculo->modelo }}</td>
-                        <td>{{ $vehiculo->kilometros }}</td>
-                        <td>{{ $vehiculo->cliente->nombre }}</td>
+                @foreach ($TodasProductos as $producto)
+                    <tr id="{{$producto->id}}" class="informacion">
+                        <td>{{ $producto->nombre }}</td>
+                        <td>{{ $producto->precio }} €</td>
                         <td>
                             <div class="d-flex align-items-center">
-
-
-                                <a href="{{ route('Clientes.edit', $vehiculo->id) }}">
+                                <a href="{{ route('Productos.edit', $producto->id) }}">
                                 <button type="button" class="btn btn-success btn-sm btn-icon-text mr-3">
                                     Editar
                                     <i class="typcn typcn-edit btn-icon-append"></i>
@@ -50,10 +43,10 @@
                             Borrar
                             <i class="typcn typcn-delete-outline btn-icon-append"></i>                          
                             </button> --}}
-                                <form action="{{ route('Vehiculos.destroy', $vehiculo->id) }}" method="Post">
+                                <form action="{{ route('Productos.destroy', $producto->id) }}" method="Post">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-danger btn-sm btn-icon-text">BORRAR</button>
+                                    <button type="submit" class="btn btn-danger btn-sm btn-icon-text">Borrar</button>
                                 </form>
                             </div>
                         </td>
@@ -61,7 +54,7 @@
                 @endforeach
             </tbody>
         </table>
-        </form>
+        
     </div>
 @endsection
 
@@ -81,8 +74,7 @@
                 "bInfo": false,
                 "bLengthChange": false,
             });
-           
-        });
 
+        });
     </script>
 @endsection

@@ -15,42 +15,42 @@
         </div>
     @endif
     <div class="table-responsive pt-3">
-        <a href="{{ route('Averias.create') }}">
-           <button type="button" class="btn btn-success btn-rounded btn-fw" style="background-color: #3198FD;">Nueva Averia</button></a>
+       <button type="button" class="btn btn-success btn-rounded btn-fw" style="background-color: #3198FD;">Nueva Factura</button>
         <table class="table table-striped project-orders-table table-hover" id="tablaClientes" style="text-align: center !important;">
             <thead>
                 <tr>
                     <th class="ml-5">Nombre</th>
-                    <th>Fecha de Registro</th>
-                    <th>Fecha de Finalizacion</th>
-                    <th>Estado</th>
+                    
                     <th>Cliente</th>
                     <th>Vehiculo</th>
-                    <th>Mecánico</th>
+                    <th>Fecha</th>
+                    <th>Importe Total</th>
                     <th>Aciones</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($TodasAverias as $averia)
-                    <tr id="{{$averia->id}}" class="informacion">
-                        <td>{{ $averia->nombre }}</td>
-                        <td>{{ $averia->fecha_registro }}</td>
-                        <td>{{ $averia->fecha_finalizacion }}</td>
-                        <td>{{ $averia->estado->estado}}</td>
-                        <td>{{ $averia->cliente->nombre }}</td>
-                         <td>{{ $averia->vehiculo->matricula }}</td>
-                          <td>{{ $averia->user->nombre }}</td>
-                       <td>
+                @foreach ($TodasFacturas as $factura)
+                    <tr id="{{$factura->id}}" class="informacion">
+                        <td>{{ $factura->concepto }}</td>
+                        <td>{{ $factura->cliente->nombre }} </td>
+                        <td>{{ $factura->averia->vehiculo->matricula }} </td>
+                         <td>{{ $factura->averia->fecha_finalizacion }}</td>
+                         <td>{{ $factura->total }} €</td>
+                        <td>
                             <div class="d-flex align-items-center">
-                                <a href="{{ route('Facturas.edit', $averia->id) }}">
+                                <a href="{{ route('Facturas.edit', $factura->id) }}">
                                 <button type="button" class="btn btn-warning btn-rounded btn-sm btn-icon-text mr-3">
                                   
                                     
                                     <i class="fa-regular fa-pen-to-square" style=" font-size: 1.3rem !important;"></i>
                                 </button></a>
-                                
-                               
-                                <form action="{{ route('Averias.destroy', $averia->id) }}" method="Post">
+                                 <a href="{{ route('Facturas.pdf', $factura->id) }}">
+                                <button type="button" class="btn btn-dark btn-rounded btn-icon mr-3">
+                                    
+                                   <i class="fa-regular fa-file-pdf " style=" font-size: 1.5rem !important;"></i>
+                                    
+                                </button></a>
+                                <form action="{{ route('Facturas.destroy', $factura->id) }}" method="Post">
                                     @csrf
                                     @method('DELETE')
                                 <button type="submit" class="btn btn-danger btn-rounded btn-sm btn-icon-text mr-3"><i class="fa-solid fa-trash" style=" font-size: 1.3rem !important;"></i></button>
@@ -83,7 +83,7 @@
                 "bInfo": false,
                 "bLengthChange": false,
             });
-           
+
         });
     </script>
 @endsection

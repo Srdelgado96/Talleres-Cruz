@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Models\Factura;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\db;
+use Barryvdh\DomPDF\Facade\Pdf;
 class FacturaController extends Controller
 {
     /**
@@ -13,7 +16,11 @@ class FacturaController extends Controller
      */
     public function index()
     {
-        //
+        session::put('pagActual', 'Facturas');
+        $TodasFacturas = Factura::all();
+       
+        return view('Factura.indexFacturas', compact('TodasFacturas'));
+        
     }
 
     /**
@@ -81,4 +88,19 @@ class FacturaController extends Controller
     {
         //
     }
+
+    public function pdf($id)
+    {
+       
+        $Factura = Factura::find($id);
+        $TodosProductosEnFactura = DB::select(
+        "select * from productos where id IN(select producto_id FROM `item_prods` WHERE factura_id=". $id.")");
+
+           
+
+        $pdf = PDF::loadView('layouts.PDFplantilla', compact('Factura', 'TodosProductosEnFactura'));
+
+        return $pdf->stream('pruebapdf.pdf');
+    }
+
 }

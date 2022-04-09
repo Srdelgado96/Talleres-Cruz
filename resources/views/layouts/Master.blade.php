@@ -8,6 +8,7 @@
   <title>Talleres Cruz</title>
   <!-- ICONOS FREE FONAWESSOME -->
   <script src="https://kit.fontawesome.com/8261f1f84b.js" crossorigin="anonymous"></script>
+
   <!-- base:css -->
    <link rel="stylesheet" href="{{ asset('vendors/typicons/typicons.css') }}">
   <link rel="stylesheet" href="{{ asset('vendors/css/vendor.bundle.base.css') }}"> 
@@ -18,6 +19,8 @@
   <link rel="stylesheet" href="{{ asset('css/vertical-layout-light/style.css') }}">
   <!-- endinject -->
   <link rel="shortcut icon" href="{{ asset('images/logo-taller-mini.png') }}" />
+
+ 
 </head>
 <body>
   <div class="row" id="proBanner">
@@ -31,7 +34,7 @@
       <div class="navbar-brand-wrapper d-flex justify-content-center">
         <div class="navbar-brand-inner-wrapper d-flex justify-content-between align-items-center w-100">
           <a class="navbar-brand brand-logo" href="/home"><img src="{{asset('images/logotaller.png')}}" alt="logo" style="width: 11rem;height: 5rem !important;"></a>
-          <a class="navbar-brand brand-logo-mini" href="index.html"><img src="images/logo-taller-mini.png" alt="logo"/></a>
+          <a class="navbar-brand brand-logo-mini" href="index.html"><img src="{{asset('images/logo-taller-mini.png')}}" alt="logo"/></a>
           <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
             <span class="typcn typcn-th-menu"></span>
           </button>
@@ -41,7 +44,7 @@
         <ul class="navbar-nav mr-lg-2">
           <li class="nav-item nav-profile">
               <li class="nav-item nav-profile" style="display: flex !important;">
-                @yield('pagActual')
+              <span class="nav-profile-name" style="font-size: 140%;"> {{Session('pagActual')}}</span>
           
             
           </li>
@@ -145,7 +148,7 @@
             </a>
           </li>
            <li class="nav-item">
-            <a class="nav-link" href="/averias">
+            <a class="nav-link" href="{{ route('Averias.index') }}">
               <i class="fa-solid fa-screwdriver-wrench menu-icon"></i>
               <span class="menu-title">Averias</span>
             
@@ -159,8 +162,8 @@
             </a>
             <div class="collapse" id="empleados">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/buttons.html"><i class="fa-solid fa-users-line menu-icon"></i>Empleados</a></li>
-                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/dropdowns.html"><i class="fa-solid fa-users-line menu-icon"></i> Nuevo Empleado</a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{ route('Empleados.index') }}"><i class="fa-solid fa-users-line menu-icon"></i>Empleados</a></li>
+                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/dropdowns.html"><i class="fa-solid fa-user-plus menu-icon"></i> Nuevo Empleado</a></li>
          
               </ul>
             </div>
@@ -168,14 +171,14 @@
           
           <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#clientes" aria-expanded="false" aria-controls="charts">
-         <i class="fa-solid fa-users menu-icon"></i>
+         <i class="fa-solid fa-people-group menu-icon"></i>
               <span class="menu-title">Clientes</span>
               <i class="menu-arrow"></i>
             </a>
             <div class="collapse" id="clientes">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="pages/charts/chartjs.html"><i class="fa-solid fa-signs-post menu-icon"></i>Clientes</a></li>
-                  <li class="nav-item"> <a class="nav-link" href="pages/charts/chartjs.html"><i class="fa-solid fa-location-crosshairs menu-icon"></i>Nuevo Cliente</a></li>
+                <li class="nav-item"> <a class="nav-link" href="pages/charts/chartjs.html"><i class="fa-solid fa-people-group menu-icon"></i>Clientes</a></li>
+                  <li class="nav-item"> <a class="nav-link" href="pages/charts/chartjs.html"><i class="fa-solid fa-person-circle-plus menu-icon"></i>Nuevo Cliente</a></li>
               </ul>
             </div>
           </li>
@@ -188,8 +191,8 @@
             </a>
             <div class="collapse" id="productos">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="pages/icons/mdi.html"><i class="fa-solid fa-cubes menu-icon"></i>Productos</a></li>
-                <li class="nav-item"> <a class="nav-link" href="pages/icons/mdi.html"><i class="fa-solid fa-user-clock menu-icon"></i>Nuevo Producto</a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{ route('Productos.index') }}"><i class="fa-solid fa-cubes menu-icon"></i>Productos</a></li>
+                <li class="nav-item"> <a class="nav-link" href="pages/icons/mdi.html"><i class="fa-solid fa-dolly menu-icon"></i>Nuevo Producto</a></li>
                
               </ul>
             </div>
@@ -202,8 +205,8 @@
             </a>
             <div class="collapse" id="facturas">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="pages/samples/login.html"> Facturas </a></li>
-                <li class="nav-item"> <a class="nav-link" href="pages/samples/register.html">Nueva Factura</a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{ route('Facturas.index') }}"><i class="fa-solid fa-folder-closed menu-icon"></i> Facturas </a></li>
+                <li class="nav-item"> <a class="nav-link" href="pages/samples/register.html"><i class="fa-solid fa-file-circle-plus menu-icon"></i>Nueva Factura</a></li>
          
          
               </ul>
@@ -219,8 +222,9 @@
             </a>
             <div class="collapse" id="vehiculos">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="vehiculos"><i class="fa-solid fa-book menu-icon"></i>Vehículos </a></li>
-                <li class="nav-item"> <a class="nav-link" href="pages/samples/error-500.html"> <i class="fa-solid fa-book menu-icon"></i>Nuevo Vehículo</a></li>
+          
+                <li class="nav-item"> <a class="nav-link" href="vehiculos"><i class="fa-solid fa-car menu-icon"></i>Vehículos </a></li>
+                <li class="nav-item"> <a class="nav-link" href="pages/samples/error-500.html"><i class="fa-solid fa-car-on menu-icon"></i>Nuevo Vehículo</a></li>
 
          
               </ul>
@@ -273,11 +277,21 @@
   <!-- endinject -->
   <!-- Custom js for this page-->
   <script src="{{ asset('js/dashboard.js') }}"></script>
+  {{-- CDN DE SWEET ALERT --}}
+  
   <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
   
   <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-  
+ <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/selectize@0.12.6/dist/js/standalone/selectize.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/algoliasearch@3.30.0/dist/algoliasearchLite.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@beta"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.css@7.1.0/themes/algolia.css" />
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/selectize@0.12.6/dist/css/selectize.css"> 
+
+
   @yield('jspagina')
   <!-- End custom js for this page-->
 </body>

@@ -11033,8 +11033,12 @@ pre code {
 }
 
 .table-hover tbody tr:hover {
-  color: #212529;
-  background-color: #eaeaf1;
+  /* color: #212529;
+  background-color: #eaeaf1; */
+  color: rgb(0, 0, 0);
+  font-weight: bold;
+
+  background-color: #3197fd39;
 }
 
 .table-primary,
@@ -12120,13 +12124,13 @@ fieldset:disabled .ajax-upload-dragdrop a.ajax-file-upload,
 .btn-success {
   color: #fff;
   background-color: #21bf06;
-  border-color: #21bf06;
+
 }
 
 .btn-success:hover {
   color: #fff;
   background-color: #1b9a05;
-  border-color: #188e04;
+
 }
 
 .btn-success:focus,
@@ -12241,14 +12245,14 @@ fieldset:disabled .ajax-upload-dragdrop a.ajax-file-upload,
 }
 
 .btn-danger {
-  color: #fff;
+  color: black;
   background-color: #dc3545;
   border-color: #dc3545;
 }
 
 .btn-danger:hover {
-  color: #fff;
-  background-color: #c82333;
+  color: white;
+  background-color: #bd2130;
   border-color: #bd2130;
 }
 
@@ -12330,8 +12334,9 @@ fieldset:disabled .ajax-upload-dragdrop a.ajax-file-upload,
 
 .btn-dark:hover {
   color: #fff;
-  background-color: #181d23;
+  background-color: #3198fd;
   border-color: #13171c;
+  
 }
 
 .btn-dark:focus,
@@ -22128,8 +22133,8 @@ code {
 
 .btn.btn-icon,
 .ajax-upload-dragdrop .btn-icon.ajax-file-upload {
-  width: 42px;
-  height: 42px;
+  width: 41px;
+  height: 39px;
   padding: 0;
 }
 

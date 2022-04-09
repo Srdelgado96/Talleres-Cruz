@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Cliente;
+use Illuminate\Support\Facades\Session;
 class ClienteController extends Controller
 {
     /**
@@ -13,6 +14,7 @@ class ClienteController extends Controller
      */
     public function index()
     {
+        session::put('pagActual', 'Clientes');
         $Todosclientes = Cliente::all();
         // dd($Todasclientes);
         return view('Cliente.indexCliente', compact('Todosclientes'));
@@ -58,6 +60,7 @@ class ClienteController extends Controller
      */
     public function edit($id)
     {
+        session::put('pagActual', 'Modificar Cliente');
         $Cliente = Cliente::find($id)->first();
         return view('Cliente.modificarCliente', compact('Cliente'));
     }
@@ -88,14 +91,7 @@ class ClienteController extends Controller
         ->with('success', 'el cliente ha sido creado con exito');
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function infoclientes(Request $request){
-        return "pepe";
-    }
+ 
 
     
 }

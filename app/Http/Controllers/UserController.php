@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Session;
+use App\User;
 class UserController extends Controller
 {
     /**
@@ -13,7 +14,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        session::put('pagActual', 'Empleados');
+        $TodosEmpleados = User::all();
+        return view('Empleado.indexEmpleado', compact('TodosEmpleados'));
     }
 
     /**
@@ -56,7 +59,7 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        echo "pepe";
     }
 
     /**

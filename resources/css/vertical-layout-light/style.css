@@ -11986,12 +11986,14 @@ textarea.is-invalid.tt-hint {
   user-select: none;
   background-color: transparent;
   border: 1px solid transparent;
-  padding: 0.875rem 1.5rem;
+  /* padding: 0.875rem 1.5rem; */
   font-size: 0.875rem;
   line-height: 1;
   border-radius: 0.1875rem;
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
+
+
 
 @media (prefers-reduced-motion: reduce) {
 
@@ -12119,14 +12121,15 @@ fieldset:disabled .ajax-upload-dragdrop a.ajax-file-upload,
 
 .btn-success {
   color: #fff;
+  font-weight: bold;
   background-color: #21bf06;
-  border-color: #21bf06;
+  /* border-color: #21bf06; */
 }
 
 .btn-success:hover {
   color: #fff;
   background-color: #1b9a05;
-  border-color: #188e04;
+  /* border-color: #188e04; */
 }
 
 .btn-success:focus,
@@ -16359,6 +16362,8 @@ a.close.disabled {
   height: 20px;
   background: no-repeat 50% / 100% 100%;
 }
+
+
 
 .carousel-control-prev-icon {
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='%23fff' width='8' height='8' viewBox='0 0 8 8'%3e%3cpath d='M5.25 0l-4 4 4 4 1.5-1.5L4.25 4l2.5-2.5L5.25 0z'/%3e%3c/svg%3e");
@@ -22091,7 +22096,7 @@ code {
 
 .btn i,
 .ajax-upload-dragdrop .ajax-file-upload i {
-  font-size: 1rem;
+  font-size: 2rem;
 }
 
 .btn.btn-rounded,
@@ -28557,6 +28562,7 @@ div.tagsinput span.tag a {
 .sidebar-icon-only .i {
   margin: 500%;
 }
+
 
 
 /*# sourceMappingURL=../maps/vertical-layout-light/style.css.map */
