@@ -279,9 +279,7 @@
   <script src="{{ asset('js/dashboard.js') }}"></script>
   {{-- CDN DE SWEET ALERT --}}
   
-  <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
-  
-  <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+ 
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
  <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
@@ -289,8 +287,11 @@
   <script src="https://cdn.jsdelivr.net/npm/algoliasearch@3.30.0/dist/algoliasearchLite.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@beta"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.css@7.1.0/themes/algolia.css" />
-   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/selectize@0.12.6/dist/css/selectize.css"> 
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/selectize@0.12.6/dist/css/selectize.css"/> 
 
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+  
+  <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
 
   @yield('jspagina')
   <!-- End custom js for this page-->
