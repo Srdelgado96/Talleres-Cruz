@@ -12336,7 +12336,7 @@ fieldset:disabled .ajax-upload-dragdrop a.ajax-file-upload,
   color: #fff;
   background-color: #3198fd;
   border-color: #13171c;
-  
+
 }
 
 .btn-dark:focus,
@@ -23958,6 +23958,7 @@ select.border-dark.tt-hint:focus {
   line-height: 1.4rem;
   vertical-align: top;
   margin-bottom: .5rem;
+  font-weight: bold;
 }
 
 .form-group.has-danger .form-control,

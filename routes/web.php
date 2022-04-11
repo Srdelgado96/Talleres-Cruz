@@ -26,8 +26,9 @@ Route::get('/vehiculos', 'VehiculoController@index')->name('indexVehiculo');
 
 //-----AVERIAS---/
 Route::resource('Averias', AveriaController::class);
+//Route::get('/AveriasEliminar/{id}', 'AveriaController@Destroy')->name('eliminarAveria');
+Route::any('/listarVehiculos', 'AveriaController@listarVehiculos')->name('listarVehiculos');
 
-Route::get('/AveriasEliminar/{id}', 'AveriaController@Destroy')->name('eliminarAveria');
 
 //-----EMPLEADO---/
 Route::resource('Empleados', UserController::class);

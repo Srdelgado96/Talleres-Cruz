@@ -8,184 +8,142 @@
 
 
 @section('principal')
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Nueva Avería</h4>
+            <form class="form-sample" action="{{ route('Averias.store') }}" METHOD="POST">
+                @csrf
+                
+                <p class="card-description">
 
-
-
-
-<div class="card">
-                <div class="card-body">
-                  <h4 class="card-title">Horizontal Two column</h4>
-                  <form class="form-sample">
-                    <p class="card-description">
-                      Personal info
-                    </p>
-                    <div class="row">
-                      <div class="col-md-6">
+                </p>
+                <div class="row">
+                    <div class="col-md-6">
                         <div class="form-group row">
-                          <label class="col-sm-3 col-form-label">First Name</label>
-                          <div class="col-sm-9">
-                            <input type="text" class="form-control">
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-md-6">
-                        <div class="form-group row">
-                          <label class="col-sm-3 col-form-label">Last Name</label>
-                          <div class="col-sm-9">
-                            <input type="text" class="form-control">
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-6">
-                        <div class="form-group row">
-                          <label class="col-sm-3 col-form-label">Gender</label>
-                          <div class="col-sm-9">
-                            <select class="form-control">
-                              <option>Male</option>
-                              <option>Female</option>
-                            </select>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-md-6">
-                        <div class="form-group row">
-                          <label class="col-sm-3 col-form-label">Date of Birth</label>
-                          <div class="col-sm-9">
-                            <input class="form-control" placeholder="dd/mm/yyyy">
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-6">
-                        <div class="form-group row">
-                          <label class="col-sm-3 col-form-label">Category</label>
-                          <div class="col-sm-9">
-                            <select class="form-control">
-                              <option>Category1</option>
-                              <option>Category2</option>
-                              <option>Category3</option>
-                              <option>Category4</option>
-                            </select>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-md-6">
-                        <div class="form-group row">
-                          <label class="col-sm-3 col-form-label">Membership</label>
-                          <div class="col-sm-4">
-                            <div class="form-check">
-                              <label class="form-check-label">
-                                <input type="radio" class="form-check-input" name="membershipRadios" id="membershipRadios1" value="" checked="">
-                                Free
-                              <i class="input-helper"></i></label>
+                            <label class="col-sm-3 col-form-label">Cliente</label>
+                            <div class="col-sm-9">
+                                <select class="form-control" id="selectCliente" name="cliente_id">
+                                    <option value="p">Eligue un Cliente</option>
+                                    @foreach ($todosClientes as $cliente)
+                                        <option value="{{ $cliente->id }}">{{ $cliente->nombre }}
+                                        </option>
+                                    @endforeach
+                                </select>
                             </div>
-                          </div>
-                          <div class="col-sm-5">
-                            <div class="form-check">
-                              <label class="form-check-label">
-                                <input type="radio" class="form-check-input" name="membershipRadios" id="membershipRadios2" value="option2">
-                                Professional
-                              <i class="input-helper"></i></label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Vehiculo</label>
+                            <div class="col-sm-9">
+                                <select class="form-control" id="selectPrueba" name="vehiculo_id">
+                                </select>
                             </div>
-                          </div>
                         </div>
-                      </div>
                     </div>
-                    <p class="card-description">
-                      Address
-                    </p>
-                    <div class="row">
-                      <div class="col-md-6">
-                        <div class="form-group row">
-                          <label class="col-sm-3 col-form-label">Address 1</label>
-                          <div class="col-sm-9">
-                            <input type="text" class="form-control">
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-md-6">
-                        <div class="form-group row">
-                          <label class="col-sm-3 col-form-label">State</label>
-                          <div class="col-sm-9">
-                            <input type="text" class="form-control">
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-6">
-                        <div class="form-group row">
-                          <label class="col-sm-3 col-form-label">Address 2</label>
-                          <div class="col-sm-9">
-                            <input type="text" class="form-control">
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-md-6">
-                        <div class="form-group row">
-                          <label class="col-sm-3 col-form-label">Postcode</label>
-                          <div class="col-sm-9">
-                            
-                            <select  id="select"  placeholder="Paises">
-                              <option>America</option>
-                              <option>Italy</option>
-                              <option>Russia</option>
-                              <option>Britain</option>
-                                <option>America2</option>
-                              <option>Italy2</option>
-                              <option>Russia2</option>
-                              <option>Britain2</option>
-                                <option>America3</option>
-                              <option>Italy4</option>
-                              <option>Russia5</option>
-                              <option>Britain6</option>
-                                <option>America7</option>
-                              <option>Italy3</option>
-                              <option>Russia2</option>
-                              <option>Britain4</option>
-
-
-                            </select>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-6">
-                        <div class="form-group row">
-                          <label class="col-sm-3 col-form-label">City</label>
-                          <div class="col-sm-9">
-                            <input type="text" class="form-control">
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-md-6">
-                        <div class="form-group row">
-                          <label class="col-sm-3 col-form-label">Country</label>
-                          <div class="col-sm-9">
-                            <input type="text" class="form-control">
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </form>
                 </div>
-              </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Mecánico</label>
+                            <div class="col-sm-9">
+                                <select class="form-control" id="selectMecanico" name="user_id">
+                                    <option value="p">Eligue un Mecánico</option>
+                                    @foreach ($todosMecanicos as $mecanico)
+                                        <option value="{{ $mecanico->id }}">{{ $mecanico->nombre }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Estado</label>
+                            <div class="col-sm-3">
+                                <div class="form-group row">
+                                    <div class="col">
+                                        <p class="mb-2">Pendiente</p>
+                                        <label class="toggle-switch toggle-switch-danger">
+                                            <input type="radio" checked="" name="estado_id">
+                                            <span class="toggle-slider round"></span>
+                                            <i class="input-helper"></i></label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group row">
+                                    <div class="col">
+                                        <p class="mb-2">Proceso</p>
+                                        <label class="toggle-switch toggle-switch-warning">
+                                            <input type="radio" name="estado_id">
+                                            <span class="toggle-slider round"></span>
+                                            <i class="input-helper"></i></label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group row">
+                                    <div class="col">
+                                        <p class="mb-2">Terminado</p>
+                                        <label class="toggle-switch toggle-switch-success">
+                                            <input type="radio" name="estado_id">
+                                            <span class="toggle-slider round"></span>
+                                            <i class="input-helper"></i></label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-              @endsection
+
+
+                <div class="form-group">
+                    <label for="exampleTextarea1">Descripción de la Averia</label>
+                    <textarea class="form-control" id="nombre" name="nombre" rows="4"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" class="btn btn-success btn-rounded btn-fw" value="pepe">
+                </div>
+            </form>
+        </div>
+    </div>
+@endsection
 
 
 @section('jspagina')
     <script>
         $(document).ready(function() {
-         
-           
-    $('#select').selectize({persist: false,});
 
-           
+
+            $('#select').selectize({
+                persist: false,
+            });
+
+
+        });
+        $('#selectCliente').change(function(e) {
+            e.preventDefault();
+
+            id = parseInt($(this).val());
+
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                url: "/listarVehiculos",
+                method: "POST",
+                data: {
+                    id: id,
+                },
+                dataType: "html",
+                success: function(elemento) {
+
+                    $("#selectPrueba").html(elemento);
+                }
+            });
         });
     </script>
 @endsection

@@ -5,10 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Averia;
 use App\Models\Estados;
+use App\Models\Cliente;
+use App\User;
+use App\Models\Vehiculo;
 use Illuminate\Support\Facades\Session;
+
 class AveriaController extends Controller
 {
-    
+
     /**
      * Display a listing of the resource.
      *
@@ -16,11 +20,10 @@ class AveriaController extends Controller
      */
     public function index()
     {
-        
+
         session::put('pagActual', 'Averia');
         $TodasAverias = Averia::all();
         return view('Averias.indexAverias', compact('TodasAverias'));
-        
     }
 
     /**
@@ -30,7 +33,10 @@ class AveriaController extends Controller
      */
     public function create()
     {
-        return view('Averias.nuevaAveria');
+        $estados = Estados::all();
+        $todosMecanicos = User::all();
+        $todosClientes = Cliente::all();
+        return view('Averias.nuevaAveria', compact('estados', 'todosMecanicos', 'todosClientes'));
     }
 
     /**
@@ -41,7 +47,7 @@ class AveriaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
     }
 
     /**
@@ -66,6 +72,8 @@ class AveriaController extends Controller
         session::put('pagActual', 'Modificar Averia');
         $Averia = Averia::find($id);
         $todoEstados = Estados::all();
+        $todosMecanicos = User::all();
+        $todosClientes = Cliente::all();
         return view('Averias.modificarAverias', compact('Averia', 'todoEstados'));
     }
 
@@ -94,7 +102,22 @@ class AveriaController extends Controller
 
         $averia->delete();
         return redirect()->route('Averias.indexAverias')
-        ->with('success', 'La Averiía ha sido creado con exito');
-    
+            ->with('success', 'La Averiía ha sido creado con exito');
+    }
+    public function listarVehiculos(Request $request)
+    {
+
+        // $id = $_POST['id'];
+        $id = 2;
+
+        $options = "";
+        $query = Vehiculo::where('cliente_id', $id)->get();
+
+        foreach ($query as $vehiculo) {
+
+            $options .= "<option value='" . $vehiculo->id . "'>" . $vehiculo->marca . " " . $vehiculo->matricula . "</option>";
+        }
+
+        return $options;
     }
 }

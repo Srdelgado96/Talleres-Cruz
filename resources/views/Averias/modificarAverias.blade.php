@@ -20,7 +20,7 @@
             <div class="card-body">
                 <h4 class="card-title">Vehículo {{ $Averia->vehiculo->marca }} {{ $Averia->vehiculo->modelo }}
                     {{ $Averia->vehiculo->matricula }}</h4>
-                <form class="forms-sample" action="{{ route('Averias.store') }}">
+                <form class="forms-sample" action="{{ route('Averias.update') }}">
                     <div class="form-group">
                         <label for="exampleInputName1">Nombre</label>
                         <input type="text" class="form-control" id="nombre" placeholder="Nombre" name="nombre"
