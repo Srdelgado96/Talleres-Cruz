@@ -65,7 +65,7 @@
                                     <div class="col">
                                         <p class="mb-2">Pendiente</p>
                                         <label class="toggle-switch toggle-switch-danger">
-                                            <input type="radio" checked="" name="estado_id">
+                                            <input type="radio" checked="" name="estado_id" value="1">
                                             <span class="toggle-slider round"></span>
                                             <i class="input-helper"></i></label>
                                     </div>
@@ -76,7 +76,7 @@
                                     <div class="col">
                                         <p class="mb-2">Proceso</p>
                                         <label class="toggle-switch toggle-switch-warning">
-                                            <input type="radio" name="estado_id">
+                                            <input type="radio" name="estado_id" value="2">
                                             <span class="toggle-slider round"></span>
                                             <i class="input-helper"></i></label>
                                     </div>
@@ -87,7 +87,7 @@
                                     <div class="col">
                                         <p class="mb-2">Terminado</p>
                                         <label class="toggle-switch toggle-switch-success">
-                                            <input type="radio" name="estado_id">
+                                            <input type="radio" name="estado_id" value="3">
                                             <span class="toggle-slider round"></span>
                                             <i class="input-helper"></i></label>
                                     </div>
@@ -105,7 +105,7 @@
                 </div>
 
                 <div class="form-group">
-                    <input type="submit" class="btn btn-success btn-rounded btn-fw" value="pepe">
+                    <input type="submit" class="btn btn-success btn-rounded btn-fw" value="Crear">
                 </div>
             </form>
         </div>
@@ -128,13 +128,14 @@
             e.preventDefault();
 
             id = parseInt($(this).val());
+            
 
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
-                url: "/listarVehiculos",
-                method: "POST",
+                url: "/listarVehiculos/"+id,
+                method: "GET",
                 data: {
                     id: id,
                 },
@@ -145,5 +146,7 @@
                 }
             });
         });
+
+    
     </script>
 @endsection

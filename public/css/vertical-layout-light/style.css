@@ -9835,8 +9835,8 @@ pre code {
 .row {
   display: flex;
   flex-wrap: wrap;
-  margin-right: -0.6875rem;
-  margin-left: -0.6875rem;
+  /* margin-right: -0.6875rem;
+  margin-left: -0.6875rem; */
 }
 
 .no-gutters {
@@ -9924,6 +9924,7 @@ pre code {
   width: 100%;
   padding-right: 0.6875rem;
   padding-left: 0.6875rem;
+  margin-top: 1%;
 }
 
 .col {
@@ -23784,7 +23785,7 @@ select.tt-query,
 select.tt-hint {
   padding: .4375rem .75rem;
   border: 0;
-  outline: 1px solid #f3f3f3;
+  outline: 1px solid #3198FD;
   color: #c9c8c8;
 }
 
