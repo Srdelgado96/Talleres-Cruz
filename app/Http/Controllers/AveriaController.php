@@ -99,9 +99,36 @@ class AveriaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        dd($request);
+        $Averia = Averia::find($request->id);
+        $Averia->nombre = $request->nombre;
+        $Averia->fecha_registro= $request->fecha_registro;
+        $Averia->fecha_finalizacion = $request->fecha_finalizacion;
+        $Averia->estado_id = $request->estado_id;
+        $Averia->cliente_id = $request->cliente_id;
+        $Averia->vehiculo_id = $request->vehiculo;
+        $Averia->user_id = $request->user_id;
+        $Averia->save();
+        return redirect()->route('Averias.index')->with('success', 'Se ha Actualizado Correctamente');
+    }
+
+
+
+    public function PruebAupdate(Request $request)
+    {
+        
+        $Averia = Averia::find($request->id);
+        $Averia->nombre = $request->nombre;
+        $Averia->fecha_registro = $request->fecha_registro;
+        $Averia->fecha_finalizacion = $request->fecha_finalizacion;
+        $Averia->estado_id = $request->estado_id;
+        $Averia->cliente_id = $request->cliente_id;
+        $Averia->vehiculo_id = $request->vehiculo_id;
+        $Averia->user_id = $request->user_id;
+        $Averia->save();
+        return redirect()->route('Averias.index')->with('success', 'Se ha Actualizado Correctamente');
     }
 
     /**
@@ -144,9 +171,9 @@ class AveriaController extends Controller
         $averia = Averia::find($id)->first();
         
         $IDcliente= $averia->cliente_id;
-       
+    
         $vehiculos = Vehiculo::where('cliente_id',$IDcliente)->get();
-     
+    
         foreach ($vehiculos as $vehiculo) {
 
             $options .= "<option value='" . $vehiculo->id . "'>" . $vehiculo->marca . " " . $vehiculo->matricula . "</option>";

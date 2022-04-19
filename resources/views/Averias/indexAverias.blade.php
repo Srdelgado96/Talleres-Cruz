@@ -22,7 +22,7 @@
             style="text-align: center !important;">
             <thead>
                 <tr>
-                    <th class="ml-5">Nombre</th>
+                    <th class="ml-5">Descripción</th>
                     <th>Fecha de Registro</th>
                     <th>Fecha de Finalizacion</th>
                     <th>Estado</th>
@@ -39,9 +39,9 @@
                         <td>{{ $averia->fecha_registro }}</td>
                         <td>{{ $averia->fecha_finalizacion }}</td>
                         <td>{{ $averia->estado->estado }}</td>
-                        <td>{{ $averia->cliente->nombre }}</td>
+                        <td id="{{ $averia->cliente_id }}">{{ $averia->cliente->nombre }}</td>
                         <td>{{ $averia->vehiculo->matricula }}</td>
-                        <td id="{{$averia->user_id}}">{{ $averia->user->nombre }}</td>
+                        <td id="{{ $averia->user_id }}">{{ $averia->user->nombre }}</td>
                         <td>
                             <div class="d-flex align-items-center">
 
@@ -49,8 +49,7 @@
                                     data-toggle="modal" data-target=".bd-example-modal-lg" id="editar">
                                     <i class="fa-regular fa-pen-to-square" style=" font-size: 1.3rem !important;"></i>
                                 </button>
-                                {{-- <input type="hidden" value="{{ $averia->id}}" id="averia_id"> --}} <button type="button"
-                                    class="btn btn-danger btn-rounded btn-sm btn-icon-text mr-3"><i
+                                <button type="button" class="btn btn-danger btn-rounded btn-sm btn-icon-text mr-3"><i
                                         class="fa-solid fa-trash" style=" font-size: 1.3rem !important;" id="borrar"></i>
                                 </button>
                             </div>
@@ -64,9 +63,11 @@
 
 
     <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
-        aria-hidden="true">
+        aria-hidden="true" id="modalModificar">
         <div class="modal-dialog modal-lg">
+
             <div class="modal-content">
+                <input type="hidden" value="" id="idAveriaHidden" />
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group row">
@@ -116,7 +117,7 @@
                                     <div class="col">
                                         <p class="mb-2">Pendiente</p>
                                         <label class="toggle-switch toggle-switch-danger">
-                                            <input type="radio" checked="" name="estado_id" value="1">
+                                            <input type="radio" name="estado_id" value="1" id="checkPendiendteModificar">
                                             <span class="toggle-slider round"></span>
                                             <i class="input-helper"></i></label>
                                     </div>
@@ -127,7 +128,7 @@
                                     <div class="col">
                                         <p class="mb-2">Proceso</p>
                                         <label class="toggle-switch toggle-switch-warning">
-                                            <input type="radio" name="estado_id" value="2">
+                                            <input type="radio" name="estado_id" value="2" id="checkProcesoModificar">
                                             <span class="toggle-slider round"></span>
                                             <i class="input-helper"></i></label>
                                     </div>
@@ -138,15 +139,54 @@
                                     <div class="col">
                                         <p class="mb-2">Terminado</p>
                                         <label class="toggle-switch toggle-switch-success">
-                                            <input type="radio" name="estado_id" value="3">
+                                            <input type="radio" name="estado_id" value="3" id="checkTermiandoModificar">
                                             <span class="toggle-slider round"></span>
                                             <i class="input-helper"></i></label>
                                     </div>
                                 </div>
                             </div>
+
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Fecha Registro</label>
+                            <div class="col-sm-9">
+                                <input type="date" class="form-control" name="fecha_registro" id="fecha_registro" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Fecha Finalizacion</label>
+                            <div class="col-sm-9">
+                                <input type="date" class="form-control" name="fecha_finalizacion"
+                                    id="fecha_finalizacion" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group row">
+
+                            <div class="col-sm-12">
+                                <label for="exampleTextarea1">Descripción de la Averia</label>
+                                <textarea class="form-control" id="nombre" name="nombre" rows="4"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-md-12 text-right">
+                        <button class="btn btn-warning btn-rounded btn-fw" id="botonModificarModal">Modificar</button>
+                    </div>
+                </div>
+
+
             </div>
 
         </div>
@@ -171,7 +211,7 @@
             });
 
         });
-
+        indiceFila = "";
         $('#borrar').click(function(e) {
             id = $(this).parents("tr").attr('id')
             fila = $(this).parents("tr")
@@ -216,29 +256,110 @@
 
 
         });
-        $('#editar').click(function(e) {
 
-            id = $(this).closest("tr").attr("id"); //ID DE LA AVERIA 
-            nombre = $(this).closest("tr").find("td:eq(0)").html()
-            fecha_registro = $(this).closest("tr").find("td:eq(1)").html()
-            fecha_finalizacion = $(this).closest("tr").find("td:eq(2)").html()
-            estado = $(this).closest("tr").find("td:eq(3)").html()
-            cliente = $(this).closest("tr").find("td:eq(4)").html()
-            vehiculo = $(this).closest("tr").find("td:eq(5)").html()
-            mecanicoId = $(this).closest("tr").find("td:eq(6)").attr("id")
-         
+        $("#botonModificarModal").click(function(e) {
+            e.preventDefault();
+            fila = $("#tablaClientes").find("tr").eq(indiceFila + 1)
+                .html() //+1 porque cuenta la cabecera de la tabla como fila
+            //alert( fila.find("td"))
+            estado_id = "3"
+            IdAveria = $("#idAveriaHidden").val()
+            fecha_registro = $("#fecha_registro").val()
+            fecha_finalizacion = $("#fecha_finalizacion").val()
+            nombre = $("#nombre").val()
+            user_id = $("#selectMecanico").val()
+            cliente_id = $("#selectCliente").val()
+            vehiculo_id = $("#selectPrueba").val()
 
-             $("#selectMecanico option[value="+mecanicoId+"]").attr("selected", true);
+            if ($('#checkProcesoModificar').prop('checked')) {
+                estado_id = "2"
+            } else if ($('#checkPendiendteModificar').prop('checked')) {
+                estado_id = "1"
+            } else {
+                estado_id = "3"
+            }
 
-            id1 = parseInt(id);
+            var token = '{{ csrf_token() }}'
+            console.log(cliente_id)
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
-                url: "/listarVehiculosParaModificarAveria/" + id,
+                url: "/ModificarAveria",
+                type: "GET",
+                data: {
+                    id: IdAveria,
+                    fecha_registro: fecha_registro,
+                    fecha_finalizacion: fecha_finalizacion,
+                    nombre: nombre,
+                    user_id: user_id,
+                    cliente_id: cliente_id,
+                    vehiculo_id: vehiculo_id,
+                    estado_id: estado_id,
+
+                },
+                dataType: "html",
+                success: function(elemento) {
+                    //alert("entro en el success")
+                    jQuery.noConflict();
+                    $('#modalModificar').modal('hide');
+
+
+                }
+            });
+        });
+
+        $('#editar').click(function(e) {
+            //MUESTRA EL MODAL CON LOS DATOS DE LA AVERIA OBTENIENDOLO DE LA TABLA DESDE EL CLIENTE
+
+            // id = $(this).closest("tr").attr("id"); //ID DE LA AVERIA 
+            // nombre = $(this).closest("tr").find("td:eq(0)").html()
+            // fecha_registro = $(this).closest("tr").find("td:eq(1)").html()
+            // fecha_finalizacion = $(this).closest("tr").find("td:eq(2)").html()
+            // estado = $(this).closest("tr").find("td:eq(3)").html()
+            // clienteId = $(this).closest("tr").find("td:eq(4)").attr("id");
+            // vehiculoId = $(this).closest("tr").find("td:eq(5)").attr("id")
+            // mecanicoId = $(this).closest("tr").find("td:eq(6)").attr("id")
+            // $("#selectMecanico option[value=" + mecanicoId + "]").attr("selected", true);
+            // $("#selectCliente option[value=" + clienteId + "]").attr("selected", true);
+
+            // if (estado == "Pendiente") {
+            //     $('#checkPendiendteModificar').prop('checked', true)
+            // } else if (estado == "Proceso") {
+            //     $('#checkProcesoModificar').prop('checked', true)
+            // } else
+            //     $('#checkTermiandoModificar').prop('checked', true)
+
+            // id = parseInt(id);
+
+
+            //UTILIZANDO LOS VALORES DESDE EL SERVIDOR RELLENAMOS EL MODAL, SABIENDO EL INDICE DE LA FILA SABEMO LA POSICION EN TODASAVERIAS
+            indiceFila = $(this).closest("tr").index(); //ID DE LA AVERIA 
+            TodasAverias = <?php echo $TodasAverias; ?>;
+            $("#idAveriaHidden").val(TodasAverias[indiceFila]["id"])
+            $("#selectMecanico option[value=" + TodasAverias[indiceFila]["user_id"] + "]").attr(
+                "selected", true);
+            $("#selectCliente option[value=" + TodasAverias[indiceFila]["cliente_id"] + "]").attr(
+                "selected", true);
+            if (TodasAverias[indiceFila]["estado_id"] == "1") {
+                $('#checkPendiendteModificar').prop('checked', true)
+            } else if (TodasAverias[indiceFila]["estado_id"] == "2") {
+                $('#checkProcesoModificar').prop('checked', true)
+            } else
+                $('#checkTermiandoModificar').prop('checked', true)
+
+            $("#fecha_registro").val(TodasAverias[indiceFila]["fecha_registro"])
+            $("#fecha_finalizacion").val(TodasAverias[indiceFila]["fecha_finalizacion"])
+            $("#nombre").val(TodasAverias[indiceFila]["nombre"])
+
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                url: "/listarVehiculosParaModificarAveria/" + TodasAverias[indiceFila]["id"],
                 method: "GET",
                 data: {
-                    id: 11,
+                    id: TodasAverias[indiceFila]["id"],
                 },
                 dataType: "html",
                 success: function(elemento) {
@@ -250,17 +371,17 @@
         });
 
 
-         $('#selectCliente').change(function(e) {
+        $('#selectCliente').change(function(e) {
             e.preventDefault();
 
             id = parseInt($(this).val());
-            
+
 
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
-                url: "/listarVehiculos/"+id,
+                url: "/listarVehiculos/" + id,
                 method: "GET",
                 data: {
                     id: id,
@@ -272,6 +393,5 @@
                 }
             });
         });
-
     </script>
 @endsection
