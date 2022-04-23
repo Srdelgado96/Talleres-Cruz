@@ -46,11 +46,12 @@
                             <div class="d-flex align-items-center">
 
                                 <button type="button" class="btn btn-warning btn-rounded btn-sm btn-icon-text mr-3"
-                                    data-toggle="modal" data-target=".bd-example-modal-lg" id="editar">
+                                    data-toggle="modal" data-target=".bd-example-modal-lg" name=botonEditar>
                                     <i class="fa-regular fa-pen-to-square" style=" font-size: 1.3rem !important;"></i>
                                 </button>
-                                <button type="button" class="btn btn-danger btn-rounded btn-sm btn-icon-text mr-3"><i
-                                        class="fa-solid fa-trash" style=" font-size: 1.3rem !important;" id="borrar"></i>
+                                <button type="button" class="btn btn-danger btn-rounded btn-sm btn-icon-text mr-3"
+                                    name="botonBorrar"><i class="fa-solid fa-trash"
+                                        style=" font-size: 1.3rem !important;"></i>
                                 </button>
                             </div>
                         </td>
@@ -68,6 +69,13 @@
 
             <div class="modal-content">
                 <input type="hidden" value="" id="idAveriaHidden" />
+                <div class="row text-center">
+                    <div class="col-md-12">
+
+                        <h4>
+                            Modificar Averia</h4>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group row">
@@ -212,7 +220,7 @@
 
         });
         indiceFila = "";
-        $('#borrar').click(function(e) {
+        $('button[name=botonBorrar').click(function(e) {
             id = $(this).parents("tr").attr('id')
             fila = $(this).parents("tr")
 
@@ -243,6 +251,14 @@
                             dataType: "html",
                             success: function(elemento) {
                                 fila.remove();
+                                Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Averia Borrada con Éxito',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                                
 
                             }
                         });
@@ -259,9 +275,8 @@
 
         $("#botonModificarModal").click(function(e) {
             e.preventDefault();
-            fila = $("#tablaClientes").find("tr").eq(indiceFila + 1)
-                .html() //+1 porque cuenta la cabecera de la tabla como fila
-            //alert( fila.find("td"))
+            fila = $("#" + $("#idAveriaHidden").val()) //buscamo la fila que tenga el id de la averia
+            //console.log(fila.find("td:eq(1)").html())
             estado_id = "3"
             IdAveria = $("#idAveriaHidden").val()
             fecha_registro = $("#fecha_registro").val()
@@ -269,6 +284,7 @@
             nombre = $("#nombre").val()
             user_id = $("#selectMecanico").val()
             cliente_id = $("#selectCliente").val()
+            NombreCliente= $("#selectCliente option:selected").text()
             vehiculo_id = $("#selectPrueba").val()
 
             if ($('#checkProcesoModificar').prop('checked')) {
@@ -300,66 +316,74 @@
                 },
                 dataType: "html",
                 success: function(elemento) {
-                    //alert("entro en el success")
+
+                    if ($('#checkProcesoModificar').prop('checked')) {
+                        estado_id = "Proceso"
+                    } else if ($('#checkPendiendteModificar').prop('checked')) {
+                        estado_id = "Pendiente"
+                    } else {
+                        estado_id = "Terminado"
+                    }
+
+
+                    console.log($("#selectMecanico option:selected").text())
+                    fila.find("td:eq(0)").html(nombre)
+                    fila.find("td:eq(1)").html(fecha_registro)
+                    fila.find("td:eq(2)").html(fecha_finalizacion)
+                    fila.find("td:eq(3)").html(estado_id)
+                    fila.find("td:eq(4)").html($("#selectCliente option:selected").text())
+                    fila.find("td:eq(5)").html($("#selectPrueba option:selected").text())
+                    fila.find("td:eq(6)").html($("#selectMecanico option:selected").text())
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Averia de '+NombreCliente+' Modificada con exito',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
                     jQuery.noConflict();
                     $('#modalModificar').modal('hide');
-
-
+                    $('#modalModificar').modal('hide');
                 }
             });
         });
 
-        $('#editar').click(function(e) {
-            //MUESTRA EL MODAL CON LOS DATOS DE LA AVERIA OBTENIENDOLO DE LA TABLA DESDE EL CLIENTE
+        $('button[name=botonEditar').click(function(e) {
 
-            // id = $(this).closest("tr").attr("id"); //ID DE LA AVERIA 
-            // nombre = $(this).closest("tr").find("td:eq(0)").html()
-            // fecha_registro = $(this).closest("tr").find("td:eq(1)").html()
-            // fecha_finalizacion = $(this).closest("tr").find("td:eq(2)").html()
-            // estado = $(this).closest("tr").find("td:eq(3)").html()
-            // clienteId = $(this).closest("tr").find("td:eq(4)").attr("id");
-            // vehiculoId = $(this).closest("tr").find("td:eq(5)").attr("id")
-            // mecanicoId = $(this).closest("tr").find("td:eq(6)").attr("id")
-            // $("#selectMecanico option[value=" + mecanicoId + "]").attr("selected", true);
-            // $("#selectCliente option[value=" + clienteId + "]").attr("selected", true);
-
-            // if (estado == "Pendiente") {
-            //     $('#checkPendiendteModificar').prop('checked', true)
-            // } else if (estado == "Proceso") {
-            //     $('#checkProcesoModificar').prop('checked', true)
-            // } else
-            //     $('#checkTermiandoModificar').prop('checked', true)
-
-            // id = parseInt(id);
-
-
-            //UTILIZANDO LOS VALORES DESDE EL SERVIDOR RELLENAMOS EL MODAL, SABIENDO EL INDICE DE LA FILA SABEMO LA POSICION EN TODASAVERIAS
-            indiceFila = $(this).closest("tr").index(); //ID DE LA AVERIA 
+            idAveriaFila = $(this).parents("tr").attr('id');
             TodasAverias = <?php echo $TodasAverias; ?>;
-            $("#idAveriaHidden").val(TodasAverias[indiceFila]["id"])
-            $("#selectMecanico option[value=" + TodasAverias[indiceFila]["user_id"] + "]").attr(
+            laAveria = [];
+
+            for (i = 0; i < TodasAverias.length; i++) {
+
+                if (TodasAverias[i]["id"] == idAveriaFila) {
+                    laAveria = TodasAverias[i]
+                }
+            }
+            $("#idAveriaHidden").val(laAveria["id"])
+            $("#selectMecanico option[value=" + laAveria["user_id"] + "]").attr(
                 "selected", true);
-            $("#selectCliente option[value=" + TodasAverias[indiceFila]["cliente_id"] + "]").attr(
+            $("#selectCliente option[value=" + laAveria["cliente_id"] + "]").attr(
                 "selected", true);
-            if (TodasAverias[indiceFila]["estado_id"] == "1") {
+            if (laAveria["estado_id"] == "1") {
                 $('#checkPendiendteModificar').prop('checked', true)
-            } else if (TodasAverias[indiceFila]["estado_id"] == "2") {
+            } else if (laAveria["estado_id"] == "2") {
                 $('#checkProcesoModificar').prop('checked', true)
             } else
                 $('#checkTermiandoModificar').prop('checked', true)
 
-            $("#fecha_registro").val(TodasAverias[indiceFila]["fecha_registro"])
-            $("#fecha_finalizacion").val(TodasAverias[indiceFila]["fecha_finalizacion"])
-            $("#nombre").val(TodasAverias[indiceFila]["nombre"])
+            $("#fecha_registro").val(laAveria["fecha_registro"])
+            $("#fecha_finalizacion").val(laAveria["fecha_finalizacion"])
+            $("#nombre").val(laAveria["nombre"])
 
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
-                url: "/listarVehiculosParaModificarAveria/" + TodasAverias[indiceFila]["id"],
+                url: "/listarVehiculosParaModificarAveria/" + laAveria["id"],
                 method: "GET",
                 data: {
-                    id: TodasAverias[indiceFila]["id"],
+                    id: laAveria["id"],
                 },
                 dataType: "html",
                 success: function(elemento) {

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Vehiculo;
+use App\Models\Cliente;
 use Illuminate\Support\Facades\Session;
 
 class VehiculoController extends Controller
@@ -17,8 +18,9 @@ class VehiculoController extends Controller
     {
         session::put('pagActual', 'Vehiculos');
         $Todosvehiculos = Vehiculo::all();
+        $TodosClientes=Cliente::all();
         // dd($Todasclientes);
-        return view('Vehiculo.indexVehiculo', compact('Todosvehiculos'));
+        return view('Vehiculo.indexVehiculo', compact('Todosvehiculos','TodosClientes'));
     }
 
     /**
@@ -28,7 +30,8 @@ class VehiculoController extends Controller
      */
     public function create()
     {
-        //
+        $TodosClientes = Cliente::all();
+        return view('Vehiculo.nuevoVehiculo', compact('TodosClientes'));
     }
 
     /**
@@ -39,7 +42,16 @@ class VehiculoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $Vehiculo= new Vehiculo();
+        $Vehiculo->marca = $request->marca;
+        $Vehiculo->modelo = $request->modelo;
+        $Vehiculo->matricula = $request->matricula;
+        $Vehiculo->kilometros = $request->kilometros;
+        $Vehiculo->cliente_id = $request->cliente_id;
+        $Vehiculo->save();
+
+        return redirect()->route('Vehiculos.index')->with('success', 'Se ha Actualizado Correctamente');
+
     }
 
     /**
@@ -71,9 +83,15 @@ class VehiculoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $Vehiculo = Vehiculo::find($request->id);
+        $Vehiculo->matricula = $request->matricula;
+        $Vehiculo->marca= $request->marca;
+        $Vehiculo->modelo= $request->modelo;
+        $Vehiculo->kilometros= $request->kilometros;
+        $Vehiculo->cliente_id= $request->cliente_id;
+        $Vehiculo->save();
     }
 
     /**
@@ -84,6 +102,10 @@ class VehiculoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $Vehiculo = Vehiculo::find($id)->first();
+
+        $Vehiculo->delete();
+        return redirect()->route('Vehiculos.index')
+        ->with('success', 'El Vehículo ha sido Eliminado con Éxito');
     }
 }

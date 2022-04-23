@@ -23772,7 +23772,7 @@ code {
 .typeahead,
 .tt-query,
 .tt-hint {
-  border: 1px solid #f3f3f3;
+  border: 1px solid #898584;
   font-weight: 400;
   font-size: 0.875rem;
 }
@@ -23786,7 +23786,7 @@ select.tt-hint {
   padding: .4375rem .75rem;
   border: 0;
   outline: 1px solid #3198FD;
-  color: #c9c8c8;
+  color: #3198FD;
 }
 
 select.form-control:focus,

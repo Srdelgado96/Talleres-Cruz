@@ -16,15 +16,19 @@ Route::get('/', 'indexController@index')->name('index');
 Auth::routes();
 //-----CLIENTES---/
 Route::resource('Clientes', ClienteController::class);
-Route::get('/home', 'ClienteController@index')->name('home');
+Route::any('/eliminarCliente/{id}', 'ClienteController@Destroy')->name('eliminarCliente');//se llama por ajax y se le pasa id
+Route::any('/ModificarCliente', 'ClienteController@update')->name('ModificarCliente'); //se llama por ajax y se le pasa id
+
 
 
 //-----VEHICULOS---/
-Route::resource('Vehiculos', ClienteController::class);
-Route::get('/vehiculos', 'VehiculoController@index')->name('indexVehiculo');
+Route::resource('Vehiculos', VehiculoController::class);
+Route::ANY('/ModificarVehiculo', 'VehiculoController@update')->name('modificarVehiculo');//se llama por ajax y se le pasa id
+Route::any('/eliminarVehiculo/{id}', 'VehiculoController@Destroy')->name('eliminarVehiculo');//se llama por ajax y se le pasa id
 
 
 //-----AVERIAS---/
+Route::get('/home', 'AveriaController@index')->name('home');
 Route::ANY('/ModificarAveria', 'AveriaController@PruebAupdate')->name('modificarAveria');
 Route::resource('Averias', AveriaController::class);
 Route::any('/eliminarAveria/{id}', 'AveriaController@Destroy')->name('eliminarAveria');
@@ -34,14 +38,15 @@ Route::any('/listarVehiculosParaModificarAveria/{id}', 'AveriaController@listarV
 
 //-----EMPLEADO---/
 Route::resource('Empleados', UserController::class);
-Route::get('/EmpleadosEliminar/{id}', 'EmpleadoController@destroy')->name('eliminarEmpleado');
+Route::any('/EmpleadosEliminar/{id}', 'EmpleadoController@destroy')->name('eliminarEmpleado');
 // Route::get('/empleados', 'EmpleadoController@index')->name('indexEmpleado');
 
 
 
 //-----PRODUCTOS---/
 Route::resource('Productos', ProductoController::class);
-Route::get('/ProductosEliminar/{id}', 'ProductoController@destroy')->name('eliminarProducto');
+Route::any('/ProductosEliminar/{id}', 'ProductoController@destroy')->name('eliminarProducto');
+Route::ANY('/ModificarProducto', 'ProductoController@update')->name('modificarProducto');
 
 
 

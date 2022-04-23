@@ -15,9 +15,9 @@ class ClienteController extends Controller
     public function index()
     {
         session::put('pagActual', 'Clientes');
-        $Todosclientes = Cliente::all();
+        $TodosClientes = Cliente::all();
         // dd($Todasclientes);
-        return view('Cliente.indexCliente', compact('Todosclientes'));
+        return view('Cliente.indexCliente', compact('TodosClientes'));
     }
 
     /**
@@ -27,7 +27,8 @@ class ClienteController extends Controller
      */
     public function create()
     {
-        //
+        $TodosClientes = Cliente::all();
+        return view('Cliente.nuevoCliente', compact('TodosClientes'));
     }
 
     /**
@@ -38,7 +39,16 @@ class ClienteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $Cliente= new Cliente();
+        $Cliente->nombre = $request->nombre;
+        $Cliente->dni = $request->dni;
+        $Cliente->telefono = $request->telefono;
+        $Cliente->email = $request->email;
+        $Cliente->password = bcrypt("123");
+        $Cliente->direccion = $request->direccion;
+        $Cliente->save();
+        return redirect()->route('Clientes.index')
+        ->with('success', 'el cliente ha sido creado con Éxito');
     }
 
     /**
@@ -72,9 +82,22 @@ class ClienteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        //dd($request->id." ". $request->nombre);
+        $Cliente = Cliente::find($request->id);
+        //dd($producto);
+        $Cliente->nombre = $request->nombre;
+        $Cliente->dni = $request->dni;
+        $Cliente->telefono = $request->telefono;
+        $Cliente->email = $request->email;
+        $Cliente->password = bcrypt("123");
+        $Cliente->direccion = $request->direccion;
+
+        $Cliente->save();
+        return redirect()->route('Clientes.index')
+        ->with('success', 'El Cliente ha sido Modificado con exito');
+
     }
 
     /**
@@ -85,13 +108,15 @@ class ClienteController extends Controller
      */
     public function destroy($id)
     {
-        $cliente = Cliente::find($id)->first();
+        //dd($id);
+        $cliente = Cliente::find($id);
+        //dd($cliente);
         $cliente->delete();
-        return redirect()->route('Clientes.indexCliente')
-        ->with('success', 'el cliente ha sido creado con exito');
+        return redirect()->route('Clientes.index')
+        ->with('success', 'el cliente ha sido Borrado con exito');
     }
 
- 
+
 
     
 }

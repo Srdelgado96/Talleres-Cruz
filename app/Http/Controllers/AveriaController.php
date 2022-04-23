@@ -144,7 +144,7 @@ class AveriaController extends Controller
 
         $averia->delete();
         return redirect()->route('Averias.index')
-            ->with('success', 'La Averiía ha sido creado con exito');
+            ->with('success', 'La Avería ha sido Eliminada con Exito');
     }
     public function listarVehiculos(Request $request)
     {

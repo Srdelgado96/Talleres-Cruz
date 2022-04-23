@@ -27,7 +27,7 @@ class ProductoController extends Controller
      */
     public function create()
     {
-        //
+        return view('Producto.nuevoProducto');
     }
 
     /**
@@ -38,7 +38,13 @@ class ProductoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //dd($request);
+        $producto= new Productos;
+        $producto->nombre = $request->nombre;
+        $producto->precio = $request->precio;
+        $producto->save();
+        return redirect()->route('Productos.index')
+        ->with('success', 'El producto se ha creado con exito.');
     }
 
     /**
@@ -70,9 +76,18 @@ class ProductoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        //dd($request->id." ". $request->nombre);
+        $producto = Productos::find($request->id);
+        //dd($producto);
+        $producto->nombre=$request->nombre;
+        $producto->precio = $request->precio;
+        $producto->save();
+        return redirect()->route('Productos.index')
+        ->with('success', 'El Producto ha sido Modificado con exito');
+
+
     }
 
     /**
@@ -83,6 +98,12 @@ class ProductoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        //dd($id);
+        $producto = Productos::find($id);
+
+        $producto->delete();
+        return redirect()->route('Productos.index')
+        ->with('success', 'El Producto ha sido Eliminado con exito');
     }
+    
 }

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Factura;
+use App\Models\Cliente;
+use App\Models\Productos;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\db;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -31,6 +33,9 @@ class FacturaController extends Controller
     public function create()
     {
         //
+        $TodosClientes = Cliente::all();
+        $TodosProductos = Productos::all();
+        return view('Factura.nuevoFactura', compact('TodosClientes', 'TodosProductos'));
     }
 
     /**

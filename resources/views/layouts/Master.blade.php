@@ -164,22 +164,22 @@
             <div class="collapse" id="empleados">
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item"> <a class="nav-link" href="{{ route('Empleados.index') }}"><i class="fa-solid fa-users-line menu-icon"></i>Empleados</a></li>
-                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/dropdowns.html"><i class="fa-solid fa-user-plus menu-icon"></i> Nuevo Empleado</a></li>
-         
+                <li class="nav-item"> <a class="nav-link" href="{{ route('Empleados.create') }}"><i class="fa-solid fa-user-plus menu-icon"></i> Nuevo Empleado</a></li>
+        
               </ul>
             </div>
           </li>
           
           <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#clientes" aria-expanded="false" aria-controls="charts">
-         <i class="fa-solid fa-people-group menu-icon"></i>
+        <i class="fa-solid fa-people-group menu-icon"></i>
               <span class="menu-title">Clientes</span>
               <i class="menu-arrow"></i>
             </a>
             <div class="collapse" id="clientes">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="pages/charts/chartjs.html"><i class="fa-solid fa-people-group menu-icon"></i>Clientes</a></li>
-                  <li class="nav-item"> <a class="nav-link" href="pages/charts/chartjs.html"><i class="fa-solid fa-person-circle-plus menu-icon"></i>Nuevo Cliente</a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{ route('Clientes.index') }}"><i class="fa-solid fa-people-group menu-icon"></i>Clientes</a></li>
+                  <li class="nav-item"> <a class="nav-link" href="{{ route('Clientes.create') }}"><i class="fa-solid fa-person-circle-plus menu-icon"></i>Nuevo Cliente</a></li>
               </ul>
             </div>
           </li>
@@ -193,8 +193,8 @@
             <div class="collapse" id="productos">
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item"> <a class="nav-link" href="{{ route('Productos.index') }}"><i class="fa-solid fa-cubes menu-icon"></i>Productos</a></li>
-                <li class="nav-item"> <a class="nav-link" href="pages/icons/mdi.html"><i class="fa-solid fa-dolly menu-icon"></i>Nuevo Producto</a></li>
-               
+                <li class="nav-item"> <a class="nav-link" href="{{ route('Productos.create') }}"><i class="fa-solid fa-dolly menu-icon"></i>Nuevo Producto</a></li>
+              
               </ul>
             </div>
           </li>
@@ -207,7 +207,7 @@
             <div class="collapse" id="facturas">
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item"> <a class="nav-link" href="{{ route('Facturas.index') }}"><i class="fa-solid fa-folder-closed menu-icon"></i> Facturas </a></li>
-                <li class="nav-item"> <a class="nav-link" href="pages/samples/register.html"><i class="fa-solid fa-file-circle-plus menu-icon"></i>Nueva Factura</a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{ route('Facturas.create') }}"><i class="fa-solid fa-file-circle-plus menu-icon"></i>Nueva Factura</a></li>
          
          
               </ul>
@@ -224,8 +224,8 @@
             <div class="collapse" id="vehiculos">
               <ul class="nav flex-column sub-menu">
           
-                <li class="nav-item"> <a class="nav-link" href="vehiculos"><i class="fa-solid fa-car menu-icon"></i>Vehículos </a></li>
-                <li class="nav-item"> <a class="nav-link" href="pages/samples/error-500.html"><i class="fa-solid fa-car-on menu-icon"></i>Nuevo Vehículo</a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{ route('Vehiculos.index') }}"><i class="fa-solid fa-car menu-icon"></i>Vehículos </a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{ route('Vehiculos.create') }}"><i class="fa-solid fa-car-on menu-icon"></i>Nuevo Vehículo</a></li>
 
          
               </ul>
