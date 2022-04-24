@@ -180,6 +180,14 @@
                 "bInfo": false,
                 "bLengthChange": false,
             });
+            
+            setTimeout(function() {
+                $('.dataTables_filter input').css('border-width', '2px');
+                $('.dataTables_filter input').css('border-color', '#3198FD');
+                $('.dataTables_filter input').css('border-radius', '30%');
+                $('.dataTables_filter label').css('font-weight', 'bold');
+            }, 0000);
+
 
 
         }); // fin del ready

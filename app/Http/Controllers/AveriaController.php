@@ -150,7 +150,7 @@ class AveriaController extends Controller
     {
         
         $id = $_GET['id'];
-        $options = "";
+        $options = "<option value='0'>Selecciona una Opción</option>";
         $query = Vehiculo::where('cliente_id', $id)->get();
 
         foreach ($query as $vehiculo) {
