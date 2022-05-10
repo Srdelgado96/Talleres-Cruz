@@ -735,7 +735,7 @@
 
     <div class="modal fade login" id="loginModal">
         <div class="modal-dialog login animated">
-            
+
             <div class="modal-content">
                 <div class="text-center">
                     <h4 class="modal-title">Inicar Sesión</h4>
@@ -755,7 +755,8 @@
 
                                     @error('email')
                                         <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
+                                            {{-- <strong>{{ $message }}</strong> --}}
+                                            <strong>Credenciales incorrecta</strong>
                                         </span>
                                     @enderror
                                     <br>
@@ -764,7 +765,7 @@
                                         required autocomplete="current-password" placeholder="Password">
                                     @error('password')
                                         <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
+                                            <strong>Credenciales incorrecta</strong>
                                         </span>
                                     @enderror
                                     {{-- <input class="btn btn-default btn-login" type="button" value="Login" onclick="loginAjax()"> --}}

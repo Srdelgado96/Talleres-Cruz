@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use App\User;
+
 class UserController extends Controller
 {
     /**
@@ -59,7 +60,7 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        echo "pepe";
+        // echo "pepe";
     }
 
     /**
@@ -83,5 +84,15 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+
+    public function esAdministrador(): bool
+    {
+        return $this->rol_id == 1;
+    }
+    public function esOperario(): bool
+    {
+        return $this->rol_id == 2;
     }
 }

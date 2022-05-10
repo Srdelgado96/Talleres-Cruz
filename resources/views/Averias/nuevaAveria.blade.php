@@ -118,9 +118,9 @@
         $(document).ready(function() {
 
 
-            $('#select').selectize({
-                persist: false,
-            });
+            // $('#selectCliente').selectize({
+            //     persist: false,
+            // });
 
 
         });

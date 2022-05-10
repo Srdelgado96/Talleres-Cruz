@@ -15,13 +15,10 @@
         </div>
     @endif
     <div class="table-responsive pt-3">
-    <button type="button" class="btn btn-success btn-rounded btn-fw" style="background-color: #3198FD;">Nueva
-            Factura</button>
-
-        <form action="{{ route('Facturas.store') }}" METHOD="POST">
+        <form action="{{ route('Facturas.store') }}" METHOD="POST" class="text-center">
             @csrf
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <div class="form-group row">
                         <label class="col-sm-3 col-form-label">Cliente</label>
                         <div class="col-sm-9">
@@ -35,9 +32,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">Vehiculo</label>
+                        <label class="col-sm-3 col-form-label">Vehículo</label>
                         <div class="col-sm-9">
                             <select class="form-control" id="selectVehiculo" name="vehiculo_id">
                                 <option value="p">Elige un Vehículo</option>
@@ -46,6 +43,27 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-md-4">
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Avería</label>
+                        <div class="col-sm-9">
+                            <select class="form-control" id="selectAveria" name="averia_id">
+                                <option value="p">Elige una Avería</option>
+
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2 text-center"></div>
+                <div class="col-md-8 text-center">
+                    <div class="form-group">
+                        <label for="exampleTextarea1">Concepto</label>
+                        <textarea class="form-control" id="concepto" name="concepto" rows="1"></textarea>
+                    </div>
+                </div>
+                <div class="col-md-2 text-center"></div>
             </div>
             <table class="table table-striped project-orders-table table-hover" id="tablaClientes"
                 style="text-align: center !important;">
@@ -64,7 +82,7 @@
                             <td>{{ $producto->id }}</td>
                             <td>{{ $producto->nombre }} </td>
                             <td>{{ $producto->precio }} </td>
-                            <td><input type="number" name="ArrayUnidades[]" id="unidades"class="input"
+                            <td><input type="number" name="ArrayUnidades[]" id="unidades" class="input"
                                     style="width: 20%;/* background-color: #21bf06; */text-align: center;color: black;font-size: 120%;border-color: #3198FD;border-radius: 30%;"
                                     value="0"></td>
                             <td style="text-align: right;">
@@ -98,6 +116,7 @@
     <script>
         $(document).ready(function() {
 
+
             $('#tablaClientes').dataTable({
                 "language": {
                     "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json"
@@ -124,7 +143,7 @@
         }); //fin ready
 
 
-
+        //este metodo nos rellena el select de vehiculos en funcion del cliente elegido en el select de cliente
         $('#selectCliente').change(function(e) {
             e.preventDefault();
 
@@ -148,15 +167,41 @@
             });
         });
 
+        //este metodo nos rellena el select de averias en funcion del vehiculo elegido en el select de vehiculo
+        $('#selectVehiculo').change(function(e) {
+            e.preventDefault();
 
-         $('.input').click(function(e){
-           // console.log("entro en click unidades")
-             $(this).css('backgroundColor', '#58FA58');
+            id = parseInt($(this).val());
 
-         });
-         
-         
-        
 
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                url: "/listarAveriasNuevaFactura/" + id,
+                method: "GET",
+                data: {
+                    id: id,
+                },
+                dataType: "html",
+                success: function(elemento) {
+
+                    $("#selectAveria").html(elemento);
+                }
+            });
+        });
+
+        $('.input').click(function(e) {
+            // console.log("entro en click unidades")
+            $(this).css('backgroundColor', '#58FA58');
+          fila=$(this).parents("tr")
+          fila.find("input[type=checkbox]").prop('checked',true)
+          if($(this).val()<=0){
+              fila.find("input[type=checkbox]").prop('checked',false)
+              $(this).css('backgroundColor', 'white');
+          }
+            
+
+        });
     </script>
 @endsection

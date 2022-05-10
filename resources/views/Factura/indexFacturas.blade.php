@@ -14,8 +14,11 @@
             {{ $message }}
         </div>
     @endif
+       
     <div class="table-responsive pt-3">
-       <button type="button" class="btn btn-success btn-rounded btn-fw" style="background-color: #3198FD;">Nueva Factura</button>
+ <a href="{{ route('Facturas.create') }}">
+            <button type="button" class="btn btn-success btn-rounded btn-fw" style="background-color: #3198FD;">Nueva
+                Factura</button></a>
         <table class="table table-striped project-orders-table table-hover" id="tablaClientes" style="text-align: center !important;">
             <thead>
                 <tr>
@@ -82,6 +85,7 @@
                 ],
                 "bInfo": false,
                 "bLengthChange": false,
+                "order": [[ 3, "desc" ]]
             });
             
             setTimeout(function() {

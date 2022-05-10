@@ -37,9 +37,20 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-    public function Rol()//UN USUARIO TIENE MUCHOS VEHICULOS
+    public function Rol() //UN USUARIO TIENE MUCHOS VEHICULOS
     {
         return $this->belongsTo(Rol::class);
     }
-   
+
+
+    public function esAdministrador(): bool
+    {
+        dd($this->rol_id);
+        return $this->rol_id == 1;
+    }
+    public function esOperario(): bool
+    {
+        dd($this->rol_id);
+        return $this->rol_id == 2;
+    }
 }

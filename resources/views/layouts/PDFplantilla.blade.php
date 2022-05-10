@@ -149,20 +149,20 @@
                     <td>
                         <strong>Subtotal</strong>
                     </td>
-                    <td> {{ round($Factura->subtotal, 2) }} </td>
+                    <td> {{ Factura->subtotal }} </td>
                 </tr>
                 <tr>
                     <td>
                         <strong>IVA (21%)</strong>
                     </td>
-                    <td>{{ round($Factura->subtotal * 0.21, 2) }}</td>
+                    <td>{{ $Factura->subtotal }}</td>
                 </tr>
                 <tr>
                     <td>
                         <strong>Total</strong>
                     </td>
                     <td>
-                        <strong>{{ round($Factura->total, 2) }}</strong>
+                        <strong>{{ $Factura->total }}</strong>
                     </td>
 
                 </tr>
@@ -171,8 +171,9 @@
         </table>
     </div>
 
-<div> <p> Cuenta Bancaria: ES80 3187 0069 7355 7213 1620</p> 
-   </div>
+    <div>
+        <p> Cuenta Bancaria: ES80 3187 0069 7355 7213 1620</p>
+    </div>
 
 
 
@@ -195,13 +196,13 @@
             La empresa no se hace responsable de los objetos personales perdidos.
         </p>
     </div>
-     <br> <br>
+    <br> <br>
     <div class="infocliente" style="width: 30% !important;">
         <label for="firmaCliente">Firma Cliente</label>
         <br>
-        <textarea name="firmaCliente" id="firmaCliente" ></textarea>
+        <textarea name="firmaCliente" id="firmaCliente"></textarea>
     </div>
-  
+
 
 
 

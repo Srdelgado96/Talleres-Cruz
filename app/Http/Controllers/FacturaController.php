@@ -6,9 +6,11 @@ use Illuminate\Http\Request;
 use App\Models\Factura;
 use App\Models\Cliente;
 use App\Models\Productos;
+use App\Models\Vehiculo;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\db;
 use Barryvdh\DomPDF\Facade\Pdf;
+
 class FacturaController extends Controller
 {
     /**
@@ -20,9 +22,8 @@ class FacturaController extends Controller
     {
         session::put('pagActual', 'Facturas');
         $TodasFacturas = Factura::all();
-       
+
         return view('Factura.indexFacturas', compact('TodasFacturas'));
-        
     }
 
     /**
@@ -46,7 +47,46 @@ class FacturaController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
+        //Creamos una factura solo con los datos del request
+        //dd($request);
+        $factura = new Factura;
+        $factura->concepto = $request->concepto;
+        $factura->averia_id = $request->averia_id;
+        $factura->cliente_id = $request->cliente_id;
+        $factura->fecha_Creacion = date('Y-m-d');
+        $factura->save();
+        //seleccionamos el id de la ultima factura que acabos de guardar
+        $productos = $request->ArrayProductosId;
+        $unidades = $request->ArrayUnidades;
+        // //dd($productos);
+        $Factura_id = Factura::max("id");
+        //dd($Factura_id);
+
+        for ($i = 0; $i < count($productos); $i++) {
+            $precioDelProducto = Productos::select('precio')->where('id', $productos[$i])->first();
+            $unidadesDelProducto = $unidades[$i];
+            //dd($unidadesDelProducto);
+            $query = "INSERT INTO item_prods(precio,unidades,factura_id,producto_id) VALUES ($precioDelProducto->precio,$unidadesDelProducto,$Factura_id,$productos[$i])";
+            //dd($query);
+            $results = DB::insert($query);
+
+            //dd($Ultimafactura);
+        }
+        $query = "select SUM(precio) as Total ,ROUND(SUM(precio/1.21),2) as SUBTOTAL from productos where id IN(select producto_id FROM `item_prods` WHERE factura_id=$Factura_id)";
+        $ObtenerTotalYSubtotalParaFactura = DB::select($query);
+        $TotalYSubtotalParaFactura = $ObtenerTotalYSubtotalParaFactura[0];
+        //dd($TotalYSubtotalParaFactura->Total);
+        //UPDATE `facturas` SET `concepto` = 'pepe', `subtotal` = '01', `total` = '01', `pagado` = 'NO' WHERE `facturas`.`id` = 20;
+        $query = "UPDATE facturas SET subtotal = '$TotalYSubtotalParaFactura->Total', total = '$TotalYSubtotalParaFactura->SUBTOTAL', pagado = 'NO' WHERE id = $Factura_id";
+        //dd($query);
+        $FinCreacionFactura = DB::update($query);
+        //dd($FinCreacionFactura);
+
+        $this->Generar_pdf($Factura_id);
+        //METER LA GENERACION DE PDF Y EL ENVIO POR CORREO
+        $cliente = Cliente::find($request->cliente_id);
+        //MailController::getMailSimple($cliente->email); factura cliente_id
+        return redirect()->route('Facturas.index')->with('success', 'Se ha Actualizado Correctamente');
     }
 
     /**
@@ -94,18 +134,48 @@ class FacturaController extends Controller
         //
     }
 
-    public function pdf($id)
+    /**
+     * Generar_pdf
+     *
+     * @param  mixed $id
+     * @return void
+     */
+    public function Generar_pdf($id)
     {
-       
         $Factura = Factura::find($id);
-        $TodosProductosEnFactura = DB::select(
-        "select * from productos where id IN(select producto_id FROM `item_prods` WHERE factura_id=". $id.")");
-
-           
-
+        $TodosProductosEnFactura = DB::select("select * from productos where id IN(select producto_id FROM `item_prods` WHERE factura_id=" . $Factura->id . ")");
+        //dd($TodosProductosEnFactura);
         $pdf = PDF::loadView('layouts.PDFplantilla', compact('Factura', 'TodosProductosEnFactura'));
-
-        return $pdf->stream('pruebapdf.pdf');
+        return $pdf->stream('Factura.pdf');
     }
 
+
+    public function listarAveriasParaNuevaFactura($id)
+    {
+        // DEBO RECIBIR EL ID DEL VEHICULO,ENCONTRAR EL VEHICULO Y CON EL MISMO ID QUE HE RECIBIDO ENCONTRAR EL CLIENTE
+        //select * from vehiculos where 'id'=6
+
+        $vehiculo = Vehiculo::where('id', $id)->first();
+        //dd($vehiculo);
+
+
+        $cliente = Cliente::where('id', $vehiculo->cliente_id)->first();
+        $TodasAverias = DB::select(
+            "SELECT * from averias
+            where id not in
+            (select averia_id
+            from facturas) and cliente_id=$cliente->id and vehiculo_id=$vehiculo->id"
+        );
+        $options = "";
+        foreach ($TodasAverias as $averia) {
+
+            $options .= "<option value='" . $averia->id . "'>" . $averia->nombre . "</option>";
+        }
+        if (empty($options)) {
+            $options = "<option value='p'>Ninguna Sin Facturar</option>";
+        }
+        return $options;
+
+        //dd($TodasAverias);
+    }
 }

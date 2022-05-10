@@ -13,6 +13,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
+        dd("__construct");
         $this->middleware('auth');
     }
 
@@ -23,6 +24,17 @@ class HomeController extends Controller
      */
     public function index()
     {
-        redirect()->action('ClienteController@index');
+
+        dd("pepe");
+        if (auth()->user()->esAdministrador()) {
+            dd("pepe");
+            return redirect('/home');
+        }
+        if (auth()->user()->esOperario()) {
+            dd("pepe");
+            return redirect()->route('Vehiculos.index');
+        } else
+            return redirect('/');
+        //redirect()->action('ClienteController@index');
     }
 }

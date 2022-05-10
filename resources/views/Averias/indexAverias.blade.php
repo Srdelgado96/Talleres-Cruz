@@ -49,10 +49,13 @@
                                     data-toggle="modal" data-target=".bd-example-modal-lg" name=botonEditar>
                                     <i class="fa-regular fa-pen-to-square" style=" font-size: 1.3rem !important;"></i>
                                 </button>
-                                <button type="button" class="btn btn-danger btn-rounded btn-sm btn-icon-text mr-3"
-                                    name="botonBorrar"><i class="fa-solid fa-trash"
-                                        style=" font-size: 1.3rem !important;"></i>
-                                </button>
+                                @if (Auth::user()->rol_id == 1)
+                                    <button type="button" class="btn btn-danger btn-rounded btn-sm btn-icon-text mr-3"
+                                        name="botonBorrar"><i class="fa-solid fa-trash"
+                                            style=" font-size: 1.3rem !important;"></i>
+                                    </button>
+                                @endif
+
                             </div>
                         </td>
                     </tr>
@@ -217,7 +220,7 @@
                 "bInfo": false,
                 "bLengthChange": false,
             });
-            
+
             setTimeout(function() {
                 $('.dataTables_filter input').css('border-width', '2px');
                 $('.dataTables_filter input').css('border-color', '#3198FD');
@@ -260,13 +263,13 @@
                             success: function(elemento) {
                                 fila.remove();
                                 Swal.fire({
-                        position: 'top-end',
-                        icon: 'success',
-                        title: 'Averia Borrada con Éxito',
-                        showConfirmButton: false,
-                        timer: 1500
-                    });
-                                
+                                    position: 'top-end',
+                                    icon: 'success',
+                                    title: 'Averia Borrada con Éxito',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                });
+
 
                             }
                         });
@@ -292,7 +295,7 @@
             nombre = $("#nombre").val()
             user_id = $("#selectMecanico").val()
             cliente_id = $("#selectCliente").val()
-            NombreCliente= $("#selectCliente option:selected").text()
+            NombreCliente = $("#selectCliente option:selected").text()
             vehiculo_id = $("#selectPrueba").val()
 
             if ($('#checkProcesoModificar').prop('checked')) {
@@ -345,7 +348,7 @@
                     Swal.fire({
                         position: 'top-end',
                         icon: 'success',
-                        title: 'Averia de '+NombreCliente+' Modificada con exito',
+                        title: 'Averia de ' + NombreCliente + ' Modificada con exito',
                         showConfirmButton: false,
                         timer: 1500
                     });
