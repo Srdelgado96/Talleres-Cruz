@@ -1,7 +1,7 @@
 @extends('layouts.Master')
 
 @section('usuarioRegistrado')
-    <p class="mb-0 font-weight-normal float-left dropdown-header">{{ Auth::user()->nombre }}</p>
+    <p class="mb-0 font-weight-normal float-left dropdown-header">{{ $cliente->nombre }}</p>
 @endsection
 
 
@@ -16,9 +16,6 @@
     @endif
 
     <div class="table-responsive pt-3">
-        <a href="{{ route('Facturas.create') }}">
-            <button type="button" class="btn btn-success btn-rounded btn-fw" style="background-color: #3198FD;">Nueva
-                Factura</button></a>
         <table class="table table-striped project-orders-table table-hover" id="tablaClientes"
             style="text-align: center !important;">
             <thead>
@@ -29,7 +26,7 @@
                     <th>Vehiculo</th>
                     <th>Fecha</th>
                     <th>Importe Total</th>
-                    <th>Aciones</th>
+                    <th>PDF</th>
                 </tr>
             </thead>
             <tbody>
@@ -42,26 +39,10 @@
                         <td>{{ $factura->total }} €</td>
                         <td>
                             <div class="d-flex align-items-center">
-                                <a href="{{ route('Facturas.edit', $factura->id) }}">
-                                    <button type="button" class="btn btn-warning btn-rounded btn-sm btn-icon-text mr-3">
-
-
-                                        <i class="fa-regular fa-pen-to-square" style=" font-size: 1.3rem !important;"></i>
-                                    </button></a>
-                                <a href="{{ route('Facturas.pdf', $factura->id) }}">
+                                <a href="{{ route('FacturasCliente.pdf', $factura->id) }}">
                                     <button type="button" class="btn btn-dark btn-rounded btn-icon mr-3">
-
                                         <i class="fa-regular fa-file-pdf " style=" font-size: 1.5rem !important;"></i>
-
                                     </button></a>
-                                <form action="{{ route('Facturas.destroy', $factura->id) }}" method="Post">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-danger btn-rounded btn-sm btn-icon-text mr-3"><i
-                                            class="fa-solid fa-trash" style=" font-size: 1.3rem !important;"></i></button>
-
-                                </form>
-
                             </div>
                         </td>
                     </tr>

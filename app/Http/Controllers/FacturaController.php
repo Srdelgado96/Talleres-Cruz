@@ -150,6 +150,12 @@ class FacturaController extends Controller
     }
 
 
+    /**
+     * listarAveriasParaNuevaFactura
+     *
+     * @param  mixed $id
+     * @return void
+     */
     public function listarAveriasParaNuevaFactura($id)
     {
         // DEBO RECIBIR EL ID DEL VEHICULO,ENCONTRAR EL VEHICULO Y CON EL MISMO ID QUE HE RECIBIDO ENCONTRAR EL CLIENTE

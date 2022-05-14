@@ -35,9 +35,14 @@
         <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
             <div class="navbar-brand-wrapper d-flex justify-content-center">
                 <div class="navbar-brand-inner-wrapper d-flex justify-content-between align-items-center w-100">
-                    <a class="navbar-brand brand-logo" href="/home"><img src="{{ asset('images/logotaller.png') }}"
-                            alt="logo" style="width: 11rem;height: 5rem !important;"></a>
-                    <a class="navbar-brand brand-logo-mini" href="index.html"><img
+                    @if (isset(Auth::user()->rol_id))
+                        <a class="navbar-brand brand-logo" href="/home"><img src="{{ asset('images/logotaller.png') }}"
+                                alt="logo" style="width: 11rem;height: 5rem !important;"></a>
+                    @else
+                        <a class="navbar-brand brand-logo" href="/"><img src="{{ asset('images/logotaller.png') }}"
+                                alt="logo" style="width: 11rem;height: 5rem !important;"></a>
+                    @endif
+                    <a class="navbar-brand brand-logo-mini" href="/"><img
                             src="{{ asset('images/logo-taller-mini.png') }}" alt="logo" /></a>
                     <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
                         <span class="typcn typcn-th-menu"></span>
@@ -155,123 +160,147 @@
             <!-- partial:partials/_sidebar.html -->
             <nav class="sidebar sidebar-offcanvas" id="sidebar">
                 <ul class="nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.html">
-                            <i class="fa-solid fa-chart-line menu-icon"></i>
-                            <span class="menu-title">Resumen Global</span>
+                    @if (isset(Auth::user()->rol_id))
+                        @if (Auth::user()->rol_id == 1)
+                            <li class="nav-item">
+                                <a class="nav-link" href="index.html">
+                                    <i class="fa-solid fa-chart-line menu-icon"></i>
+                                    <span class="menu-title">Resumen Global</span>
 
-                        </a>
-                    </li>
+                                </a>
+                            </li>
+                        @endif
+
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('Averias.index') }}">
+                                <i class="fa-solid fa-screwdriver-wrench menu-icon"></i>
+                                <span class="menu-title">Averias</span>
+
+                            </a>
+                        </li>
+                        @if (Auth::user()->rol_id == 1)
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="collapse" href="#empleados" aria-expanded="false"
+                                    aria-controls="ui-basic">
+                                    <i class="fa-solid fa-users-line menu-icon"></i>
+                                    <span class="menu-title">Empleados</span>
+                                    <i class="menu-arrow"></i>
+                                </a>
+                                <div class="collapse" id="empleados">
+                                    <ul class="nav flex-column sub-menu">
+                                        <li class="nav-item"> <a class="nav-link"
+                                                href="{{ route('Empleados.index') }}"><i
+                                                    class="fa-solid fa-users-line menu-icon"></i>Empleados</a></li>
+                                        <li class="nav-item"> <a class="nav-link"
+                                                href="{{ route('Empleados.create') }}"><i
+                                                    class="fa-solid fa-user-plus menu-icon"></i> Nuevo Empleado</a></li>
+
+                                    </ul>
+                                </div>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="collapse" href="#clientes" aria-expanded="false"
+                                    aria-controls="charts">
+                                    <i class="fa-solid fa-people-group menu-icon"></i>
+                                    <span class="menu-title">Clientes</span>
+                                    <i class="menu-arrow"></i>
+                                </a>
+                                <div class="collapse" id="clientes">
+                                    <ul class="nav flex-column sub-menu">
+                                        <li class="nav-item"> <a class="nav-link"
+                                                href="{{ route('Clientes.index') }}"><i
+                                                    class="fa-solid fa-people-group menu-icon"></i>Clientes</a></li>
+                                        <li class="nav-item"> <a class="nav-link"
+                                                href="{{ route('Clientes.create') }}"><i
+                                                    class="fa-solid fa-person-circle-plus menu-icon"></i>Nuevo
+                                                Cliente</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="collapse" href="#productos" aria-expanded="false"
+                                    aria-controls="icons">
+                                    <i class="fa-solid fa-boxes-stacked menu-icon"></i>
+                                    <span class="menu-title">Productos</span>
+                                    <i class="menu-arrow"></i>
+                                </a>
+                                <div class="collapse" id="productos">
+                                    <ul class="nav flex-column sub-menu">
+                                        <li class="nav-item"> <a class="nav-link"
+                                                href="{{ route('Productos.index') }}"><i
+                                                    class="fa-solid fa-cubes menu-icon"></i>Productos</a></li>
+                                        <li class="nav-item"> <a class="nav-link"
+                                                href="{{ route('Productos.create') }}"><i
+                                                    class="fa-solid fa-dolly menu-icon"></i>Nuevo Producto</a></li>
+
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="collapse" href="#facturas" aria-expanded="false"
+                                    aria-controls="auth">
+                                    <i class="fa-solid fa-folder-open menu-icon"></i>
+                                    <span class="menu-title">Facturas</span>
+                                    <i class="menu-arrow"></i>
+                                </a>
+                                <div class="collapse" id="facturas">
+                                    <ul class="nav flex-column sub-menu">
+                                        <li class="nav-item"> <a class="nav-link"
+                                                href="{{ route('Facturas.index') }}"><i
+                                                    class="fa-solid fa-folder-closed menu-icon"></i> Facturas </a></li>
+                                        <li class="nav-item"> <a class="nav-link"
+                                                href="{{ route('Facturas.create') }}"><i
+                                                    class="fa-solid fa-file-circle-plus menu-icon"></i>Nueva
+                                                Factura</a>
+                                        </li>
+
+
+                                    </ul>
+                                </div>
+                            </li>
+
+
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="collapse" href="#vehiculos"
+                                    aria-expanded="false" aria-controls="auth">
+                                    <i class="fa-solid fa-car menu-icon"></i>
+                                    <span class="menu-title">Vehículos</span>
+                                    <i class="menu-arrow"></i>
+                                </a>
+                                <div class="collapse" id="vehiculos">
+                                    <ul class="nav flex-column sub-menu">
+
+                                        <li class="nav-item"> <a class="nav-link"
+                                                href="{{ route('Vehiculos.index') }}"><i
+                                                    class="fa-solid fa-car menu-icon"></i>Vehículos </a></li>
+                                        <li class="nav-item"> <a class="nav-link"
+                                                href="{{ route('Vehiculos.create') }}"><i
+                                                    class="fa-solid fa-car-on menu-icon"></i>Nuevo Vehículo</a></li>
+
+
+                                    </ul>
+                                </div>
+                            </li>
+                        @endif
+                    @endif
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('Averias.index') }}">
+                        <a class="nav-link" href="{{ route('areaClienteAverias') }}">
                             <i class="fa-solid fa-screwdriver-wrench menu-icon"></i>
-                            <span class="menu-title">Averias</span>
+                            <span class="menu-title">Mis Averias</span>
 
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" data-toggle="collapse" href="#empleados" aria-expanded="false"
-                            aria-controls="ui-basic">
-                            <i class="fa-solid fa-users-line menu-icon"></i>
-                            <span class="menu-title">Empleados</span>
-                            <i class="menu-arrow"></i>
-                        </a>
-                        <div class="collapse" id="empleados">
-                            <ul class="nav flex-column sub-menu">
-                                <li class="nav-item"> <a class="nav-link"
-                                        href="{{ route('Empleados.index') }}"><i
-                                            class="fa-solid fa-users-line menu-icon"></i>Empleados</a></li>
-                                <li class="nav-item"> <a class="nav-link"
-                                        href="{{ route('Empleados.create') }}"><i
-                                            class="fa-solid fa-user-plus menu-icon"></i> Nuevo Empleado</a></li>
-
-                            </ul>
-                        </div>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="collapse" href="#clientes" aria-expanded="false"
-                            aria-controls="charts">
-                            <i class="fa-solid fa-people-group menu-icon"></i>
-                            <span class="menu-title">Clientes</span>
-                            <i class="menu-arrow"></i>
-                        </a>
-                        <div class="collapse" id="clientes">
-                            <ul class="nav flex-column sub-menu">
-                                <li class="nav-item"> <a class="nav-link"
-                                        href="{{ route('Clientes.index') }}"><i
-                                            class="fa-solid fa-people-group menu-icon"></i>Clientes</a></li>
-                                <li class="nav-item"> <a class="nav-link"
-                                        href="{{ route('Clientes.create') }}"><i
-                                            class="fa-solid fa-person-circle-plus menu-icon"></i>Nuevo Cliente</a></li>
-                            </ul>
-                        </div>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="collapse" href="#productos" aria-expanded="false"
-                            aria-controls="icons">
-                            <i class="fa-solid fa-boxes-stacked menu-icon"></i>
-                            <span class="menu-title">Productos</span>
-                            <i class="menu-arrow"></i>
-                        </a>
-                        <div class="collapse" id="productos">
-                            <ul class="nav flex-column sub-menu">
-                                <li class="nav-item"> <a class="nav-link"
-                                        href="{{ route('Productos.index') }}"><i
-                                            class="fa-solid fa-cubes menu-icon"></i>Productos</a></li>
-                                <li class="nav-item"> <a class="nav-link"
-                                        href="{{ route('Productos.create') }}"><i
-                                            class="fa-solid fa-dolly menu-icon"></i>Nuevo Producto</a></li>
-
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="collapse" href="#facturas" aria-expanded="false"
-                            aria-controls="auth">
+                        <a class="nav-link" href="{{ route('areaClienteFacturas') }}">
                             <i class="fa-solid fa-folder-open menu-icon"></i>
-                            <span class="menu-title">Facturas</span>
-                            <i class="menu-arrow"></i>
+                            <span class="menu-title">Mis Facturas</span>
+
                         </a>
-                        <div class="collapse" id="facturas">
-                            <ul class="nav flex-column sub-menu">
-                                <li class="nav-item"> <a class="nav-link"
-                                        href="{{ route('Facturas.index') }}"><i
-                                            class="fa-solid fa-folder-closed menu-icon"></i> Facturas </a></li>
-                                <li class="nav-item"> <a class="nav-link"
-                                        href="{{ route('Facturas.create') }}"><i
-                                            class="fa-solid fa-file-circle-plus menu-icon"></i>Nueva Factura</a></li>
-
-
-                            </ul>
-                        </div>
                     </li>
-
-
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="collapse" href="#vehiculos" aria-expanded="false"
-                            aria-controls="auth">
-                            <i class="fa-solid fa-car menu-icon"></i>
-                            <span class="menu-title">Vehículos</span>
-                            <i class="menu-arrow"></i>
-                        </a>
-                        <div class="collapse" id="vehiculos">
-                            <ul class="nav flex-column sub-menu">
-
-                                <li class="nav-item"> <a class="nav-link"
-                                        href="{{ route('Vehiculos.index') }}"><i
-                                            class="fa-solid fa-car menu-icon"></i>Vehículos </a></li>
-                                <li class="nav-item"> <a class="nav-link"
-                                        href="{{ route('Vehiculos.create') }}"><i
-                                            class="fa-solid fa-car-on menu-icon"></i>Nuevo Vehículo</a></li>
-
-
-                            </ul>
-                        </div>
-                    </li>
-
-
 
                 </ul>
             </nav>

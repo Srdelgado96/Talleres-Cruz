@@ -22,6 +22,6 @@ class OpeAuth
                 return redirect()->route('Productos.index');
             }
         }
-        return redirect()->route('/'); //si no es ope
+        return redirect('/'); //si no es ope
     }
 }

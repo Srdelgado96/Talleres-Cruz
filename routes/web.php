@@ -12,9 +12,41 @@ use Illuminate\Support\Facades\Auth;
 | contains the "web" middleware group. Now create something great!
 |
 */
+// Route::get('/login-google', function () {
+
+//     return Socialite::driver('google')->redirect();
+// });
+
+// Route::get('/google-callback', function () {
+//     $user = Socialite::driver('google')->user();
+//     $userExists = Empleado::where('external_id', $user->id)->where('external_auth', 'google')->first();
+//     if ($userExists) {
+//         Auth::login($userExists);
+//     } else {
+//         $empleadoNew =  Empleado::create([
+//             'nombre' => $user->name,
+//             'email' => $user->email,
+//             'avatar' => $user->avatar,
+//             'external_id' => $user->id,
+//             'external_auth' => 'google',
+//             'tipo' => 'O',
+//         ]);
+//         Auth::login($empleadoNew);
+//     }
+//     return redirect('/FormIncidencia'); // aqui llega logeado
+
+// });
 
 Route::get('/', 'indexController@index')->name('index');
 Auth::routes();
+
+//-----AREA CLIENTES---/
+Route::ANY('/LoginCliente', 'indexController@LoginCliente')->name('LoginCliente');
+Route::ANY('/AreaCliente', 'indexController@areaClienteAverias')->name('areaClienteAverias');
+Route::ANY('/areaClienteFacturas', 'indexController@areaClienteFacturas')->name('areaClienteFacturas');
+Route::get('/FacturasPdfCliente/{id}', 'FacturaController@Generar_pdf')->name('FacturasCliente.pdf');
+
+
 //-----CLIENTES---/
 Route::resource('Clientes', ClienteController::class)->middleware('auth.admin');
 Route::any('/eliminarCliente/{id}', 'ClienteController@Destroy')->name('eliminarCliente')->middleware('auth.admin'); //se llama por ajax y se le pasa id

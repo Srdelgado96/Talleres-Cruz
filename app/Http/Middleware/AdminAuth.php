@@ -24,5 +24,6 @@ class AdminAuth
             }
             return redirect("/"); //si no es admin ni mecanico
         }
+        return redirect("/");
     }
 }

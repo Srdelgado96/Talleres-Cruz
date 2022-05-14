@@ -86,7 +86,7 @@
 <body>
     <div>
         Fecha
-        <strong>{{ $Factura->averia->fecha_finalizacion }}</strong>
+        <strong>{{ Date('d/m/Y', strtotime($Factura->averia->fecha_finalizacion)) }}</strong>
         <br>
         <span> <strong>Pagado: {{ $Factura->pagado }}</strong></span>
 
@@ -149,7 +149,7 @@
                     <td>
                         <strong>Subtotal</strong>
                     </td>
-                    <td> {{ Factura->subtotal }} </td>
+                    <td> {{ $Factura->subtotal }} </td>
                 </tr>
                 <tr>
                     <td>

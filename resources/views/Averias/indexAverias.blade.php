@@ -36,8 +36,12 @@
                 @foreach ($TodasAverias as $averia)
                     <tr id="{{ $averia->id }}" class="informacion">
                         <td>{{ $averia->nombre }}</td>
-                        <td>{{ $averia->fecha_registro }}</td>
-                        <td>{{ $averia->fecha_finalizacion }}</td>
+                        <td>{{ Date('d/m/Y', strtotime($averia->fecha_registro)) }}</td>
+                        @if ($averia->fecha_finalizacion != null && $averia->fecha_finalizacion != '')
+                            <td>{{ Date('d/m/Y', strtotime($averia->fecha_finalizacion)) }}</td>
+                        @else
+                            <td>{{ $averia->fecha_finalizacion }}</td>
+                        @endif
                         <td>{{ $averia->estado->estado }}</td>
                         <td id="{{ $averia->cliente_id }}">{{ $averia->cliente->nombre }}</td>
                         <td>{{ $averia->vehiculo->matricula }}</td>
