@@ -115,7 +115,7 @@
                 "bInfo": false,
                 "bLengthChange": false,
             });
-            
+
             setTimeout(function() {
                 $('.dataTables_filter input').css('border-width', '2px');
                 $('.dataTables_filter input').css('border-color', '#3198FD');
@@ -128,7 +128,7 @@
 
 
 
-        
+
         $('button[name=botonEditar]').click(function(e) {
 
             //UTILIZANDO LOS VALORES DESDE EL SERVIDOR RELLENAMOS EL MODAL, SABIENDO EL INDICE DE LA FILA SABEMO LA POSICION EN TODASAVERIAS
@@ -137,9 +137,9 @@
             //console.log(idProductoFila);
             TodasProductos = <?php echo $TodasProductos; ?>;
             elProducto = [];
-             //alert(TodasProductos[1]["id"])
+            //alert(TodasProductos[1]["id"])
             for (i = 0; i < TodasProductos.length; i++) {
-            
+
                 if (TodasProductos[i]["id"] == idProductoFila) {
                     elProducto = TodasProductos[i]
                 }
@@ -214,7 +214,7 @@
         $("#botonModificarModal").click(function(e) {
             e.preventDefault();
             //console.log('el id del producto a modicar es ' +$("#idProductoHidden").val())
-            fila = $("#"+$("#idProductoHidden").val())
+            fila = $("#" + $("#idProductoHidden").val())
             //console.log(fila.html()) //+1 porque cuenta la cabecera de la tabla como fila
             //console.log(fila.find("td:eq(1)").html())
 
@@ -244,7 +244,7 @@
                     // console.log(vehiculo_id)
                     console.log($("#selectMecanico option:selected").text())
                     fila.find("td:eq(0)").html(nombre)
-                    fila.find("td:eq(1)").html(precio)
+                    fila.find("td:eq(1)").html(precio + "€")
                     nombre = $("#nombreModificar").val("")
                     precio = $("#precioModificar").val("")
 

@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Cliente;
+use App\Models\Averia;
 use Illuminate\Support\Facades\Session;
+
 class ClienteController extends Controller
 {
     /**
@@ -39,7 +41,7 @@ class ClienteController extends Controller
      */
     public function store(Request $request)
     {
-        $Cliente= new Cliente();
+        $Cliente = new Cliente();
         $Cliente->nombre = $request->nombre;
         $Cliente->dni = $request->dni;
         $Cliente->telefono = $request->telefono;
@@ -48,7 +50,7 @@ class ClienteController extends Controller
         $Cliente->direccion = $request->direccion;
         $Cliente->save();
         return redirect()->route('Clientes.index')
-        ->with('success', 'el cliente ha sido creado con Éxito');
+            ->with('success', 'el cliente ha sido creado con Éxito');
     }
 
     /**
@@ -96,8 +98,7 @@ class ClienteController extends Controller
 
         $Cliente->save();
         return redirect()->route('Clientes.index')
-        ->with('success', 'El Cliente ha sido Modificado con exito');
-
+            ->with('success', 'El Cliente ha sido Modificado con exito');
     }
 
     /**
@@ -113,10 +114,31 @@ class ClienteController extends Controller
         //dd($cliente);
         $cliente->delete();
         return redirect()->route('Clientes.index')
-        ->with('success', 'el cliente ha sido Borrado con exito');
+            ->with('success', 'el cliente ha sido Borrado con exito');
     }
 
-
-
-    
+    public function LoginCliente(Request $request)
+    {
+        session::put('soyCliente', 'soyCliente');
+        if (!$request) {
+            return redirect("/")->with('error', "fallo al logearse");
+        }
+        //dd($request);
+        $email = $request->email;
+        $dni = $request->dni;
+        //dd($dni);
+        $TodosClientes = Cliente::where('email', $email)->where('dni', $dni)->get();
+        //dd($TodosClientes);
+        if (!$TodosClientes) {
+            return redirect("/")->with('error', "fallo al logearse");
+        } else
+            session::put('emailCliente', $email);
+        session::put('dniCliente', $dni);
+        session::put('pagActual', 'Mis Averia');
+        $clienteID = $TodosClientes[0]->id;
+        $cliente = Cliente::find($clienteID);
+        $TodasAverias = Averia::where('cliente_id', $clienteID)->orderBy('id', 'desc')->get();
+        //dd($TodasAverias);
+        return view('AreaCliente.indexAreaCliente', compact('TodasAverias', 'TodosClientes', 'cliente'));
+    }
 }

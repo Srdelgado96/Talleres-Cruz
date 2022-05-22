@@ -287,20 +287,22 @@
                             </li>
                         @endif
                     @endif
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('areaClienteAverias') }}">
-                            <i class="fa-solid fa-screwdriver-wrench menu-icon"></i>
-                            <span class="menu-title">Mis Averias</span>
+                    @if (Session('soyCliente') == 'soyCliente')
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('areaClienteAverias') }}">
+                                <i class="fa-solid fa-screwdriver-wrench menu-icon"></i>
+                                <span class="menu-title">Mis Averias</span>
 
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('areaClienteFacturas') }}">
-                            <i class="fa-solid fa-folder-open menu-icon"></i>
-                            <span class="menu-title">Mis Facturas</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('areaClienteFacturas') }}">
+                                <i class="fa-solid fa-folder-open menu-icon"></i>
+                                <span class="menu-title">Mis Facturas</span>
 
-                        </a>
-                    </li>
+                            </a>
+                        </li>
+                    @endif
 
                 </ul>
             </nav>

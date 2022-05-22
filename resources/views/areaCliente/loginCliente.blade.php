@@ -22,40 +22,57 @@
 
 </head>
 
+
 <body>
-    <div class="container-scroller">
-        <div class="container-fluid page-body-wrapper full-page-wrapper">
-            <div class="content-wrapper d-flex align-items-center auth px-0">
-                <div class="row w-100 mx-0">
-                    <div class="col-lg-4 mx-auto">
-                        <div class="auth-form-light text-center py-5 px-4 px-sm-5">
-                            <div class="brand-logo">
-                                <img src="{{ asset('images/logotaller.png') }}" alt="logo" /></a>
+    <div class="container-scroller" id="fondo">
+        <div class=" content-wrapper d-flex align-items-center auth px-0">
+            <div class="row w-100 mx-0">
+                <div class="col-lg-4 mx-auto">
+                    <div class="auth-form-light text-center py-5 px-4 px-sm-5">
+                        <div class="brand-logo">
+                            <img src="{{ asset('images/logotaller.png') }}" style="width: 101%;" alt="logo" /></a>
 
-                            </div>
-
-                            <form class="pt-3" method="POST" action="{{ route('login') }}">
-                                @csrf
-                                <div class="form-group">
-                                    <input type="email" class="form-control form-control-lg" id="exampleInputEmail1"
-                                        placeholder="Usuario">
-                                </div>
-                                <div class="form-group">
-                                    <input type="password" class="form-control form-control-lg"
-                                        id="exampleInputPassword1" placeholder="Contraseña">
-                                </div>
-                                <div class="mt-3">
-                                    <a class="btn btn-block btn-info btn-lg font-weight-medium auth-form-btn"
-                                        href="../../index.html">SIGN IN</a>
-                                </div>
-                            </form>
                         </div>
+
+                        <form method="POST" action="{{ route('login') }}">
+                            @csrf
+
+                            <input id="email" type="text" class="form-control @error('email') is-invalid @enderror"
+                                name="email" value="{{ old('email') }}" required autocomplete="email" autofocus
+                                placeholder="email">
+
+                            @error('email')
+                                <span class="invalid-feedback" role="alert">
+                                    {{-- <strong>{{ $message }}</strong> --}}
+                                    <strong>Credenciales incorrecta</strong>
+                                </span>
+                            @enderror
+                            <br>
+                            <input id="password" type="password"
+                                class="form-control @error('password') is-invalid @enderror" name="password" required
+                                autocomplete="current-password" placeholder="Password">
+                            @error('password')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>Credenciales incorrecta</strong>
+                                </span>
+                            @enderror
+                            {{-- <input class="btn btn-default btn-login" type="button" value="Login" onclick="loginAjax()"> --}}
+                            <button type="submit" class="btn btn-info" style="margin:4%">
+                                {{ __('Login') }}
+                            </button>
+                            <br>
+                            @if (Route::has('password.request'))
+                                <a href="javascript: showRegisterForm();">olvide la contraseña</a>
+                                </a>
+                            @endif
+                        </form>
                     </div>
                 </div>
             </div>
-            <!-- content-wrapper ends -->
         </div>
-        <!-- page-body-wrapper ends -->
+        <!-- content-wrapper ends -->
+    </div>
+    <!-- page-body-wrapper ends -->
     </div>
     <!-- container-scroller -->
     <!-- base:js -->

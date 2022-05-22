@@ -69,7 +69,7 @@
 
     </div>
 
-
+    {{-- modal editar --}}
     <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
         aria-hidden="true" id="modalModificar">
         <div class="modal-dialog modal-lg">
@@ -240,7 +240,7 @@
             fila = $(this).parents("tr")
 
             Swal.fire({
-                    title: "Deseas Eliminar la Averia del Vehiculo " + "pepe",
+                    title: "Deseas Eliminar la Averia del Vehiculo ",
                     text: "¿Eliminar?",
                     icon: 'warning',
                     showCancelButton: true,

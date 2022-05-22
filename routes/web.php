@@ -41,10 +41,12 @@ Route::get('/', 'indexController@index')->name('index');
 Auth::routes();
 
 //-----AREA CLIENTES---/
-Route::ANY('/LoginCliente', 'indexController@LoginCliente')->name('LoginCliente');
+
 Route::ANY('/AreaCliente', 'indexController@areaClienteAverias')->name('areaClienteAverias');
 Route::ANY('/areaClienteFacturas', 'indexController@areaClienteFacturas')->name('areaClienteFacturas');
 Route::get('/FacturasPdfCliente/{id}', 'FacturaController@Generar_pdf')->name('FacturasCliente.pdf');
+Route::ANY('/loginClienteModal', 'ClienteController@LoginCliente')->name('loginClienteModal');
+
 
 
 //-----CLIENTES---/
@@ -64,7 +66,7 @@ Route::any('/eliminarVehiculo/{id}', 'VehiculoController@Destroy')->name('elimin
 Route::get('/home', 'AveriaController@index')->name('home')->middleware('auth.admin');
 Route::ANY('/ModificarAveria', 'AveriaController@PruebAupdate')->name('modificarAveria')->middleware('auth.admin');
 Route::resource('Averias', AveriaController::class);
-Route::any('/eliminarAveria/{id}', 'AveriaController@Destroy')->name('eliminarAveria')->middleware('auth.admin')->middleware('auth.admin');
+Route::any('/eliminarAveria/{id}', 'AveriaController@Destroy')->name('eliminarAveria')->middleware('auth.admin');
 Route::any('/listarVehiculos/{id}', 'AveriaController@listarVehiculos')->name('listarVehiculos')->middleware('auth.admin');
 Route::any('/listarVehiculosParaModificarAveria/{id}', 'AveriaController@listarVehiculosParaModificarAveria')->name('listarVehiculosModificarAveria')->middleware('auth.admin');
 Route::any('/listarAveriasNuevaFactura/{id}', 'FacturaController@listarAveriasParaNuevaFactura')->name('listarAveriasParaNuevaFactura')->middleware('auth.admin');
@@ -72,8 +74,13 @@ Route::any('/listarAveriasNuevaFactura/{id}', 'FacturaController@listarAveriasPa
 
 
 //-----EMPLEADO---/
+Route::ANY('/Login', 'indexController@LoginCliente')->name('LoginCliente');
 Route::resource('Empleados', UserController::class)->middleware('auth.admin');;
 Route::any('/EmpleadosEliminar/{id}', 'EmpleadoController@destroy')->name('eliminarEmpleado')->middleware('auth.admin');
+Route::any('/eliminarEmpleado/{id}', 'UserController@destroy')->name('eliminarEmpleado')->middleware('auth.admin');
+Route::ANY('/ModificarEmpleado', 'UserController@PruebAupdate')->name('ModificarEmpleado')->middleware('auth.admin');
+
+
 // Route::get('/empleados', 'EmpleadoController@index')->name('indexEmpleado');
 
 
@@ -89,3 +96,5 @@ Route::ANY('/ModificarProducto', 'ProductoController@update')->name('modificarPr
 Route::resource('Facturas', FacturaController::class)->middleware('auth.admin');
 Route::get('/FacturasEliminar/{id}', 'FacturaController@destroy')->name('eliminarFactura')->middleware('auth.admin');
 Route::get('/FacturasPdf/{id}', 'FacturaController@Generar_pdf')->name('Facturas.pdf')->middleware('auth.admin');
+Route::any('/eliminarFactura/{id}', 'FacturaController@destroy')->name('eliminarFactura')->middleware('auth.admin');
+Route::any('/pagadaFactura/{id}', 'FacturaController@pagadaFactura')->name('pagadaFactura')->middleware('auth.admin');

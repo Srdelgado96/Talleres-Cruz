@@ -10,6 +10,7 @@ use App\Models\Vehiculo;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\db;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\Mail;
 
 class FacturaController extends Controller
 {
@@ -75,17 +76,21 @@ class FacturaController extends Controller
         $query = "select SUM(precio) as Total ,ROUND(SUM(precio/1.21),2) as SUBTOTAL from productos where id IN(select producto_id FROM `item_prods` WHERE factura_id=$Factura_id)";
         $ObtenerTotalYSubtotalParaFactura = DB::select($query);
         $TotalYSubtotalParaFactura = $ObtenerTotalYSubtotalParaFactura[0];
-        //dd($TotalYSubtotalParaFactura->Total);
-        //UPDATE `facturas` SET `concepto` = 'pepe', `subtotal` = '01', `total` = '01', `pagado` = 'NO' WHERE `facturas`.`id` = 20;
         $query = "UPDATE facturas SET subtotal = '$TotalYSubtotalParaFactura->Total', total = '$TotalYSubtotalParaFactura->SUBTOTAL', pagado = 'NO' WHERE id = $Factura_id";
-        //dd($query);
         $FinCreacionFactura = DB::update($query);
-        //dd($FinCreacionFactura);
-
-        $this->Generar_pdf($Factura_id);
-        //METER LA GENERACION DE PDF Y EL ENVIO POR CORREO
+        //$pdf = $this->Generar_pdf($Factura_id); 
         $cliente = Cliente::find($request->cliente_id);
-        //MailController::getMailSimple($cliente->email); factura cliente_id
+        $EmailCliente = $cliente->email;
+        $Factura = Factura::find($Factura_id);
+        $TodosProductosEnFactura = DB::select("select * from productos where id IN(select producto_id FROM `item_prods` WHERE factura_id=" . $Factura->id . ")");
+        $pdf = PDF::loadView('layouts.PDFplantilla', compact('Factura', 'TodosProductosEnFactura'));
+        $data = [];
+        Mail::send('email.email', $data, function ($message) use ($pdf) {
+            $message->from('delgadogarridoalejandro@gmail.com')
+                ->to('alex-96recre@hotmail.com')
+                ->subject('Factura de la Avería')
+                ->attachData($pdf->output(), "TalleresCruz.pdf");
+        });
         return redirect()->route('Facturas.index')->with('success', 'Se ha Actualizado Correctamente');
     }
 
@@ -131,8 +136,23 @@ class FacturaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $Factura = Factura::find($id)->first();
+
+        $Factura->delete();
+        return redirect()->route('Facturas.index')
+            ->with('success', 'La Factura ha sido Eliminada con Exito');
     }
+    public function pagadaFactura($id)
+    {
+
+        $Factura = Factura::find($id)->first();
+        $Factura->pagado = "SI";
+        $Factura->save();
+        return redirect()->route('Facturas.index')
+            ->with('success', 'La Factura ha sido Eliminada con Exito');
+    }
+
+
 
     /**
      * Generar_pdf
