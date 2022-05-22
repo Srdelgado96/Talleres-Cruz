@@ -11,15 +11,15 @@
     <script src="https://kit.fontawesome.com/8261f1f84b.js" crossorigin="anonymous"></script>
 
     <!-- base:css -->
-    <link rel="stylesheet" href="{{ asset('vendors/typicons/typicons.css') }}">
-    <link rel="stylesheet" href="{{ asset('vendors/css/vendor.bundle.base.css') }}">
+    <link rel="stylesheet" href="{{ secure_asset('vendors/typicons/typicons.css') }}">
+    <link rel="stylesheet" href="{{ secure_asset('vendors/css/vendor.bundle.base.css') }}">
     <!-- endinject -->
     <!-- plugin css for this page -->
     <!-- End plugin css for this page -->
     <!-- inject:css -->
-    <link rel="stylesheet" href="{{ asset('css/vertical-layout-light/style.css') }}">
+    <link rel="stylesheet" href="{{ secure_asset('css/vertical-layout-light/style.css') }}">
     <!-- endinject -->
-    <link rel="shortcut icon" href="{{ asset('images/logo-taller-mini.png') }}" />
+    <link rel="shortcut icon" href="{{ secure_asset('images/logo-taller-mini.png') }}" />
 
 
 </head>
@@ -36,14 +36,16 @@
             <div class="navbar-brand-wrapper d-flex justify-content-center">
                 <div class="navbar-brand-inner-wrapper d-flex justify-content-between align-items-center w-100">
                     @if (isset(Auth::user()->rol_id))
-                        <a class="navbar-brand brand-logo" href="/home"><img src="{{ asset('images/logotaller.png') }}"
-                                alt="logo" style="width: 11rem;height: 5rem !important;"></a>
+                        <a class="navbar-brand brand-logo" href="/home"><img
+                                src="{{ secure_asset('images/logotaller.png') }}" alt="logo"
+                                style="width: 11rem;height: 5rem !important;"></a>
                     @else
-                        <a class="navbar-brand brand-logo" href="/"><img src="{{ asset('images/logotaller.png') }}"
-                                alt="logo" style="width: 11rem;height: 5rem !important;"></a>
+                        <a class="navbar-brand brand-logo" href="/"><img
+                                src="{{ secure_asset('images/logotaller.png') }}" alt="logo"
+                                style="width: 11rem;height: 5rem !important;"></a>
                     @endif
                     <a class="navbar-brand brand-logo-mini" href="/"><img
-                            src="{{ asset('images/logo-taller-mini.png') }}" alt="logo" /></a>
+                            src="{{ secure_asset('images/logo-taller-mini.png') }}" alt="logo" /></a>
                     <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
                         <span class="typcn typcn-th-menu"></span>
                     </button>
@@ -340,20 +342,20 @@
     <!-- container-scroller -->
 
     <!-- base:js -->
-    <script src="{{ asset('vendors/js/vendor.bundle.base.js') }}"></script>
+    <script src="{{ secure_asset('vendors/js/vendor.bundle.base.js') }}"></script>
     <!-- endinject -->
     <!-- Plugin js for this page-->
-    <script src="{{ asset('vendors/chart.js/Chart.min.js') }}"></script>
+    <script src="{{ secure_asset('vendors/chart.js/Chart.min.js') }}"></script>
     <!-- End plugin js for this page-->
     <!-- inject:js -->
-    <script src="{{ asset('js/off-canvas.js') }}"></script>
-    <script src="{{ asset('js/hoverable-collapse.js') }}"></script>
-    <script src="{{ asset('js/template.js') }}"></script>
-    <script src="{{ asset('js/settings.js') }}"></script>
-    <script src="{{ asset('js/todolist.js') }}"></script>
+    <script src="{{ secure_asset('js/off-canvas.js') }}"></script>
+    <script src="{{ secure_asset('js/hoverable-collapse.js') }}"></script>
+    <script src="{{ secure_asset('js/template.js') }}"></script>
+    <script src="{{ secure_asset('js/settings.js') }}"></script>
+    <script src="{{ secure_asset('js/todolist.js') }}"></script>
     <!-- endinject -->
     <!-- Custom js for this page-->
-    <script src="{{ asset('js/dashboard.js') }}"></script>
+    <script src="{{ secure_asset('js/dashboard.js') }}"></script>
     {{-- CDN DE SWEET ALERT --}}
 
 

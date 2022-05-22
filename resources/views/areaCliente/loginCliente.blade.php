@@ -10,15 +10,15 @@
     <script src="https://kit.fontawesome.com/8261f1f84b.js" crossorigin="anonymous"></script>
 
     <!-- base:css -->
-    <link rel="stylesheet" href="{{ asset('vendors/typicons/typicons.css') }}">
-    <link rel="stylesheet" href="{{ asset('vendors/css/vendor.bundle.base.css') }}">
+    <link rel="stylesheet" href="{{ secure_asset('vendors/typicons/typicons.css') }}">
+    <link rel="stylesheet" href="{{ secure_asset('vendors/css/vendor.bundle.base.css') }}">
     <!-- endinject -->
     <!-- plugin css for this page -->
     <!-- End plugin css for this page -->
     <!-- inject:css -->
-    <link rel="stylesheet" href="{{ asset('css/vertical-layout-light/style.css') }}">
+    <link rel="stylesheet" href="{{ secure_asset('css/vertical-layout-light/style.css') }}">
     <!-- endinject -->
-    <link rel="shortcut icon" href="{{ asset('images/logo-taller-mini.png') }}" />
+    <link rel="shortcut icon" href="{{ secure_asset('images/logo-taller-mini.png') }}" />
 
 </head>
 
@@ -30,7 +30,8 @@
                 <div class="col-lg-4 mx-auto">
                     <div class="auth-form-light text-center py-5 px-4 px-sm-5">
                         <div class="brand-logo">
-                            <img src="{{ asset('images/logotaller.png') }}" style="width: 101%;" alt="logo" /></a>
+                            <img src="{{ secure_asset('images/logotaller.png') }}" style="width: 101%;"
+                                alt="logo" /></a>
 
                         </div>
 
@@ -76,20 +77,20 @@
     </div>
     <!-- container-scroller -->
     <!-- base:js -->
-    <script src="{{ asset('vendors/js/vendor.bundle.base.js') }}"></script>
+    <script src="{{ secure_asset('vendors/js/vendor.bundle.base.js') }}"></script>
     <!-- endinject -->
     <!-- Plugin js for this page-->
-    <script src="{{ asset('vendors/chart.js/Chart.min.js') }}"></script>
+    <script src="{{ secure_asset('vendors/chart.js/Chart.min.js') }}"></script>
     <!-- End plugin js for this page-->
     <!-- inject:js -->
-    <script src="{{ asset('js/off-canvas.js') }}"></script>
-    <script src="{{ asset('js/hoverable-collapse.js') }}"></script>
-    <script src="{{ asset('js/template.js') }}"></script>
-    <script src="{{ asset('js/settings.js') }}"></script>
-    <script src="{{ asset('js/todolist.js') }}"></script>
+    <script src="{{ secure_asset('js/off-canvas.js') }}"></script>
+    <script src="{{ secure_asset('js/hoverable-collapse.js') }}"></script>
+    <script src="{{ secure_asset('js/template.js') }}"></script>
+    <script src="{{ secure_asset('js/settings.js') }}"></script>
+    <script src="{{ secure_asset('js/todolist.js') }}"></script>
     <!-- endinject -->
     <!-- Custom js for this page-->
-    <script src="{{ asset('js/dashboard.js') }}"></script>
+    <script src="{{ secure_asset('js/dashboard.js') }}"></script>
     {{-- CDN DE SWEET ALERT --}}
 
 
