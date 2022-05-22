@@ -8,7 +8,7 @@ use Illuminate\Notifications\Notifiable;
 use App\Models\Rol;
 
 class User extends Authenticatable
-{
+{ //
     use Notifiable;
 
     /**
