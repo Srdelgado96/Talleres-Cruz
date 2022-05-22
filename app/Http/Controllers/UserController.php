@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use App\User;
+use App\Models\Rol;
 
 class UserController extends Controller
 {
@@ -17,7 +18,8 @@ class UserController extends Controller
     {
         session::put('pagActual', 'Empleados');
         $TodosEmpleados = User::all();
-        return view('Empleado.indexEmpleado', compact('TodosEmpleados'));
+        $todosPermiso = Rol::all();
+        return view('Empleado.indexEmpleado', compact('TodosEmpleados', 'todosPermiso'));
     }
 
     /**
@@ -27,7 +29,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        $todosPermiso = Rol::all();
+        return view('Empleado.nuevoEmpleado', compact('todosPermiso'));
     }
 
     /**
@@ -38,7 +41,15 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $User = new User();
+        $User->nombre = $request->nombre;
+        $User->rol_id = $request->permiso_id;
+        $User->telefono = $request->telefono;
+        $User->email = $request->email;
+        $User->password = bcrypt("123");
+        $User->save();
+        return redirect()->route('Empleados.index')
+            ->with('success', 'el Empleado ha sido creado con Éxito');
     }
 
     /**
@@ -83,9 +94,26 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+
+        $User = User::find($id)->first();
+        //dd($User);
+        $User->delete();
+        return redirect()->route('Empleados.index')
+            ->with('success', 'El Empleado ha sido Eliminado con éxito');
     }
 
+    public function PruebAupdate(Request $request)
+    {
+
+        $User = User::find($request->id);
+        $User->nombre = $request->nombre;
+        $User->telefono = $request->telefono;
+        $User->email = $request->email;
+        $User->rol_id = $request->rol_id;
+
+        $User->save();
+        return redirect()->route('Empleados.index')->with('success', 'Se ha Actualizado Correctamente');
+    }
 
     public function esAdministrador(): bool
     {

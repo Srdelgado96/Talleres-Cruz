@@ -41,9 +41,8 @@
                     <li class="nav-item"><a class="nav-link" href="#team">Equipo</a></li>
                     <li class="nav-item"><a class="nav-link" href="#contact">Contacto</a></li>
 
-                </ul>
+                </ul </div>
             </div>
-        </div>
     </nav>
     <!-- Masthead-->
     <header class="masthead">
@@ -51,7 +50,7 @@
             <div class="masthead-subheading">Bienvenidos!</div>
             <div class="masthead-heading text-uppercase">Talleres Cruz</div>
             <a class="btn btn-primary btn-xl text-uppercase" id="botonlogin" href="javascript:void(0)"
-                onclick="openLoginModal();">Login</a>
+                onclick="openLoginModal();">Área Cliente</a>
         </div>
     </header>
     <!-- servcios-->
@@ -745,7 +744,7 @@
                         <div class="content">
                             <div class="error"></div>
                             <div class="form loginBox">
-                                <form method="POST" action="{{ route('login') }}">
+                                <form method="POST" action="{{ route('loginClienteModal') }}">
                                     @csrf
 
                                     <input id="email" type="text"
@@ -760,18 +759,16 @@
                                         </span>
                                     @enderror
                                     <br>
-                                    <input id="password" type="password"
-                                        class="form-control @error('password') is-invalid @enderror" name="password"
+                                    <input id="dni" type="password"
+                                        class="form-control @error('password') is-invalid @enderror" name="dni"
                                         required autocomplete="current-password" placeholder="Password">
                                     @error('password')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>Credenciales incorrecta</strong>
                                         </span>
                                     @enderror
-                                    {{-- <input class="btn btn-default btn-login" type="button" value="Login" onclick="loginAjax()"> --}}
-                                    <button type="submit" class="btn btn-default btn-login">
-                                        {{ __('Login') }}
-                                    </button>
+                                    <input class="btn btn-default btn-login" type="submit" value="Login">
+
                                     @if (Route::has('password.request'))
                                         <a href="javascript: showRegisterForm();">olvide la contraseña</a>
                                         </a>
@@ -786,12 +783,10 @@
                             <div class="line r"></div>
                         </div>
                         <div class="social">
-                            <a class="circle github" href="#">
-                                <i class="fa-brands fa-github fa-fw"></i>
 
-                                <a id="facebook_login" class="circle facebook" href="#">
-                                    <i class="fa-brands fa-google fa-fw"></i>
-                                </a>
+                            <a id="facebook_login" class="circle facebook" href="#">
+                                <i class="fa-brands fa-google fa-fw"></i>
+                            </a>
 
 
                         </div>
@@ -843,17 +838,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <div class="forgot login-footer">
-                        <span>¿No tienes Cuenta?
-                            <a class="nav-link" href="javascript: showRegisterForm();">Registrarme</a>
-                        </span>
-                    </div>
-                    <div class="forgot register-footer" style="display:none">
-                        <span>Ya tienes cuenta?</span>
-                        <a href="javascript: showLoginForm();">Login</a>
-                    </div>
-                </div>
+
             </div>
         </div>
     </div>
@@ -876,6 +861,32 @@
     <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
     <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
     <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+    <script>
+        function loginAjax() {
+            email = $("#email").val();
+            dni = $("#password").val();
+            console.log(email + " " + dni)
+
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                url: "/loginClienteModal",
+                method: "post",
+                data: {
+                    email: email,
+                    dni: dni,
+                },
+                dataType: "html",
+                success: function(elemento) {
+
+                    consolo.log("todobien")
+                }
+            });
+
+
+        }
+    </script>
 
 </body>
 

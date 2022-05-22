@@ -38,29 +38,39 @@
                         <td>{{ $factura->concepto }}</td>
                         <td>{{ $factura->cliente->nombre }} </td>
                         <td>{{ $factura->averia->vehiculo->matricula }} </td>
-                        <td>{{ Date('d/m/Y', strtotime($factura->averia->fecha_finalizacion)) }}</td>
+
+                        @if ($factura->averia->fecha_finalizacion != null && $factura->averia->fecha_finalizacion != '')
+                            <td>{{ Date('d/m/Y', strtotime($factura->averia->fecha_finalizacion)) }}</td>
+                        @else
+                            <td>{{ $factura->averia->fecha_finalizacion }}</td>
+                        @endif
                         <td>{{ $factura->total }} €</td>
                         <td>
                             <div class="d-flex align-items-center">
-                                <a href="{{ route('Facturas.edit', $factura->id) }}">
-                                    <button type="button" class="btn btn-warning btn-rounded btn-sm btn-icon-text mr-3">
+                                @if ($factura->pagado == 'NO')
+                                    <button type="button" class="btn btn-warning btn-rounded btn-sm btn-icon-text mr-3"
+                                        data-toggle="modal" data-target=".bd-example-modal-lg" name=botonEditar>
+                                        <i class="fa-solid fa-sack-xmark" style=" font-size: 1.3rem !important;"></i>
+                                    </button>
+                                @else
+                                    <button type="button" class="btn btn-success btn-rounded btn-sm btn-icon-text mr-3"
+                                        data-toggle="modal" data-target=".bd-example-modal-lg" name=botonEditar>
+                                        <i class="fa-solid fa-sack-dollar" style=" font-size: 1.3rem !important;"></i>
 
-
-                                        <i class="fa-regular fa-pen-to-square" style=" font-size: 1.3rem !important;"></i>
-                                    </button></a>
+                                    </button>
+                                @endif
                                 <a href="{{ route('Facturas.pdf', $factura->id) }}">
                                     <button type="button" class="btn btn-dark btn-rounded btn-icon mr-3">
 
                                         <i class="fa-regular fa-file-pdf " style=" font-size: 1.5rem !important;"></i>
 
                                     </button></a>
-                                <form action="{{ route('Facturas.destroy', $factura->id) }}" method="Post">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-danger btn-rounded btn-sm btn-icon-text mr-3"><i
-                                            class="fa-solid fa-trash" style=" font-size: 1.3rem !important;"></i></button>
-
-                                </form>
+                                @if (Auth::user()->rol_id == 1)
+                                    <button type="button" class="btn btn-danger btn-rounded btn-sm btn-icon-text mr-3"
+                                        name="botonBorrar"><i class="fa-solid fa-trash"
+                                            style=" font-size: 1.3rem !important;"></i>
+                                    </button>
+                                @endif
 
                             </div>
                         </td>
@@ -99,6 +109,91 @@
                 $('.dataTables_filter label').css('font-weight', 'bold');
             }, 0000);
 
+
+        });
+
+
+        indiceFila = "";
+        $('button[name=botonBorrar').click(function(e) {
+            id = $(this).parents("tr").attr('id')
+            fila = $(this).parents("tr")
+            console.log(id)
+            Swal.fire({
+                    title: "Deseas Eliminar la Factura",
+                    text: "¿Eliminar?",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: "Sí, eliminar",
+                    cancelButtonText: "Cancelar",
+                    confirmButtonColor: '#3198FD',
+                    cancelButtonColor: 'red',
+                })
+                .then(resultado => {
+                    if (resultado.value) {
+                        // Hicieron click en "Sí"
+                        // $(location).attr("href","{{ route('Averias.index') }}")
+
+                        $.ajax({
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            },
+                            url: "eliminarFactura/" + id,
+                            method: "POST",
+                            data: {
+                                id: id,
+                            },
+                            dataType: "html",
+                            success: function(elemento) {
+                                fila.remove();
+                                Swal.fire({
+                                    position: 'top-end',
+                                    icon: 'success',
+                                    title: 'Averia Borrada con Éxito',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                });
+
+
+                            }
+                        });
+
+                    } else {
+                        // Dijeron que no
+                        $(location).attr("href", "{{ route('Facturas.index') }}")
+                    }
+                });
+
+
+
+        });
+
+        $('button[name=botonEditar').click(function(e) {
+
+            idFacturaFila = $(this).parents("tr").attr('id');
+            fila = $(this).parents("tr");
+
+
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                url: "/pagadaFactura/" + idFacturaFila,
+                method: "GET",
+                data: {
+                    id: idFacturaFila,
+                },
+                dataType: "html",
+                success: function(elemento) {
+
+                    // fila.find("td:eq(5)").html(
+                    //     "<button type='button' class='btn btn-success btn-rounded btn-sm btn-icon-text mr-3'ata-toggle='modal' data-target='.bd-example-modal-lg' name='botonEditar'> i class='fa-solid fa-sack-dollar' style=' font-size: 1.3rem !important;'></i> </button><button type='button' class='btn btn-danger btn-rounded btn-sm btn-icon-text mr-3'name='botonBorrar'><i class='fa-solid fa-trash'style='font-size: 1.3rem !important;'></i></button>"
+                    // )
+                    var td = fila.find("td:eq(5)")
+                    var boton = td.find("button:first")
+                    boton.prop("class", "btn btn-success btn-rounded btn-sm btn-icon-text mr-3")
+                    //console.log(boton)
+                }
+            });
 
         });
     </script>

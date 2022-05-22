@@ -26,7 +26,7 @@ class AveriaController extends Controller
         $TodosClientes = Cliente::all();
         $TodosVehiculos = Vehiculo::all();
         $TodosMecanicos = User::all();
-        return view('Averias.indexAverias', compact('TodasAverias','TodosClientes', 'TodosVehiculos', 'TodosMecanicos'));
+        return view('Averias.indexAverias', compact('TodasAverias', 'TodosClientes', 'TodosVehiculos', 'TodosMecanicos'));
     }
 
     /**
@@ -101,10 +101,10 @@ class AveriaController extends Controller
      */
     public function update(Request $request)
     {
-        dd($request);
+        //dd($request);
         $Averia = Averia::find($request->id);
         $Averia->nombre = $request->nombre;
-        $Averia->fecha_registro= $request->fecha_registro;
+        $Averia->fecha_registro = $request->fecha_registro;
         $Averia->fecha_finalizacion = $request->fecha_finalizacion;
         $Averia->estado_id = $request->estado_id;
         $Averia->cliente_id = $request->cliente_id;
@@ -118,7 +118,7 @@ class AveriaController extends Controller
 
     public function PruebAupdate(Request $request)
     {
-        
+
         $Averia = Averia::find($request->id);
         $Averia->nombre = $request->nombre;
         $Averia->fecha_registro = $request->fecha_registro;
@@ -148,7 +148,7 @@ class AveriaController extends Controller
     }
     public function listarVehiculos(Request $request)
     {
-        
+
         $id = $_GET['id'];
         $options = "<option value='0'>Selecciona una Opción</option>";
         $query = Vehiculo::where('cliente_id', $id)->get();
@@ -161,19 +161,19 @@ class AveriaController extends Controller
         return $options;
     }
 
-    
+
     public function listarVehiculosParaModificarAveria(Request $request)
     {
 
         $id = $_GET['id']; //id de la averia nos viene desde ajax
         $options = "";
-        
+
         $averia = Averia::find($id)->first();
-        
-        $IDcliente= $averia->cliente_id;
-    
-        $vehiculos = Vehiculo::where('cliente_id',$IDcliente)->get();
-    
+
+        $IDcliente = $averia->cliente_id;
+
+        $vehiculos = Vehiculo::where('cliente_id', $IDcliente)->get();
+
         foreach ($vehiculos as $vehiculo) {
 
             $options .= "<option value='" . $vehiculo->id . "'>" . $vehiculo->marca . " " . $vehiculo->matricula . "</option>";
